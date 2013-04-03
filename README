@@ -1,0 +1,2 @@
+doi file app/config/parameter.yml.dist thanh parameter.yml
+./composer install
