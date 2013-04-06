@@ -1,2 +1,10 @@
-doi file app/config/parameter.yml.dist thanh parameter.yml
-./composer install
+1) COPY va doi file app/config/parameter.yml.dist thanh parameter.yml
+2) git ignore
+  /web/bundles/
+  /app/bootstrap*
+  /app/cache/*
+  /app/logs/*
+  /vendor/
+  /app/config/parameters.yml
+3) ./composer install
+4) sau khi commit thi push len branch cua minh, sau do pull request

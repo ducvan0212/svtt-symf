@@ -1,3 +1,6 @@
+test_association:
+  path: /hello/{name}
+  defaults: {_controller: AcmeWorkBundle:Default:index }
 work_createJob:
   path: /createJob
   defaults: { _controller: AcmeWorkBundle:Default:createJob }

@@ -1,1 +1,5 @@
 Hello {{ name }}!
+{% for job in jobs %}
+  <div>{{job.title}}</div>
+  <div>{{job.contact}}</div>
+{% endfor %}

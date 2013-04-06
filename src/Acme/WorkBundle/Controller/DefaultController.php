@@ -19,7 +19,9 @@ class DefaultController extends Controller
      */
     public function indexAction($name)
     {
-        return array('name' => $name);
+        $user = $this->getUser();
+        $jobs = $user->getJobs();
+        return array('name' => $name, 'jobs' => $jobs);
     }
 
     public function createJobAction(Request $request)
