@@ -1,0 +1,10 @@
+{% extends '::base.html.twig' %}
+
+{% block title %}Create a job{% endblock %}
+
+{% block body %}
+<form action="{{ path('work_createJob') }}" method="post" {{ form_enctype(form) }}>
+{{ form_widget(form) }}
+<input type="submit" />
+</form>
+{% endblock %}

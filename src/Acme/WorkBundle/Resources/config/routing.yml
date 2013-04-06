@@ -1,0 +1,3 @@
+work_createJob:
+  path: /createJob
+  defaults: { _controller: AcmeWorkBundle:Default:createJob }
