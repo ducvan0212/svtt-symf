@@ -4,10 +4,23 @@
         <meta charset="UTF-8" />
         <title>{% block title %}Welcome!{% endblock %}</title>
         {% block stylesheets %}{% endblock %}
+        <link href="{{ asset('/app/Resources/views/stylesheet/main.css') }}" type="text/css" rel="stylesheet" />
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     </head>
     <body>
+    	/* Navigation bar */
+    	<div id="navbar">
+    		<ul>
+    			<li><a href="#">Home</a></li>
+    			<li><a href="#">About</a></li>
+    			<li><a href="#">Help</a></li>
+    		</ul>
+    	</div>
+    
+    	/* Body */
         {% block body %}{% endblock %}
+        
+        /* Script */
         {% block javascripts %}{% endblock %}
     </body>
 </html>
