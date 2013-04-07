@@ -14,10 +14,40 @@
     			<li><a href="#">Home</a></li>
     			<li><a href="#">About</a></li>
     			<li><a href="#">Help</a></li>
+                {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                    <li>
+                        <a href="{{ path('fos_user_profile_show') }}">
+                            {{ 'Profile' }}
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ path('work_createJob') }}">
+                            {{ 'For Employer' }}
+                        </a>
+                    </li>
+                {% endif %}
     		</ul>
     	</div>
     
-    	/* Body */
+        <div>
+            {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                {{ 'layout.logged_in_as'|trans({'%username%': app.user.username}, 'FOSUserBundle') }} |
+                <a href="{{ path('fos_user_security_logout') }}">
+                    {{ 'layout.logout'|trans({}, 'FOSUserBundle') }}
+                </a>
+            {% else %}
+                <a href="{{ path('fos_user_security_login') }}">{{ 'layout.login'|trans({}, 'FOSUserBundle') }}</a> or 
+                <a href="{{ path('fos_user_registration_register') }}">{{ 'layout.register'|trans({}, 'FOSUserBundle') }}</a>
+            {% endif %}
+        </div>
+        {% for key, message in app.session.getFlashes() %}
+        <div class="{{ key }}">
+            {{ message|trans({}, 'FOSUserBundle') }}
+        </div>
+        {% endfor %}
+    	
+
+        /* Body */
         {% block body %}{% endblock %}
         
         /* Script */
