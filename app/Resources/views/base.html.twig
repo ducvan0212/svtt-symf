@@ -3,54 +3,65 @@
     <head>
         <meta charset="UTF-8" />
         <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
-        <link href="{{ asset('/app/Resources/views/stylesheet/main.css') }}" type="text/css" rel="stylesheet" />
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+        {% block stylesheets %}
+            {% stylesheets '../app/Resources/public/css/*' filter='cssrewrite' %}
+                <link rel="stylesheet" href="{{ asset_url }}" />
+            {% endstylesheets %}
+        {% endblock %}
     </head>
-    <body>
-    	/* Navigation bar */
-    	<div id="navbar">
-    		<ul>
-    			<li><a href="#">Home</a></li>
-    			<li><a href="#">About</a></li>
-    			<li><a href="#">Help</a></li>
-                {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-                    <li>
-                        <a href="{{ path('fos_user_profile_show') }}">
-                            {{ 'Profile' }}
-                        </a>
-                    </li>
-                    <li>
-                        <a href="{{ path('work_createJob') }}">
-                            {{ 'For Employer' }}
-                        </a>
-                    </li>
-                {% endif %}
-    		</ul>
-    	</div>
-    
-        <div>
-            {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-                {{ 'layout.logged_in_as'|trans({'%username%': app.user.username}, 'FOSUserBundle') }} |
-                <a href="{{ path('fos_user_security_logout') }}">
-                    {{ 'layout.logout'|trans({}, 'FOSUserBundle') }}
-                </a>
-            {% else %}
-                <a href="{{ path('fos_user_security_login') }}">{{ 'layout.login'|trans({}, 'FOSUserBundle') }}</a> or 
-                <a href="{{ path('fos_user_registration_register') }}">{{ 'layout.register'|trans({}, 'FOSUserBundle') }}</a>
-            {% endif %}
-        </div>
-        {% for key, message in app.session.getFlashes() %}
-        <div class="{{ key }}">
-            {{ message|trans({}, 'FOSUserBundle') }}
-        </div>
-        {% endfor %}
-    	
 
-        /* Body */
-        {% block body %}{% endblock %}
+    <body>
+        <header class="navbar navbar-fixed-top navbar-inverse">
+            <div class="navbar-inner">
+                <div class="container">
+                    <a class="brand" href="#">FindMyJob</a>
+                    <ul class="nav pull-left">
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">About</a></li>
+                        <li><a href="#">Help</a></li>
+                    </ul>
+                    <ul class="nav pull-right">
+                        {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                            <li><a href="{{ path('work_createJob') }}">{{ 'For Employer' }}</a></li>
+                            <li><a href="{{ path('fos_user_profile_show') }}">{{ 'Profile' }}</a></li>
+                            <li><a href="{{ path('fos_user_security_logout') }}">{{ 'layout.logout'|trans({}, 'FOSUserBundle') }}</a></li>
+                        {% else %}
+                            <li><a href="{{ path('fos_user_security_login') }}">{{ 'layout.login'|trans({}, 'FOSUserBundle') }}</a></li>
+                            <li><a href="{{ path('fos_user_registration_register') }}">{{ 'layout.register'|trans({}, 'FOSUserBundle') }}</a></li>
+                        {% endif %}
+                    </ul>
+                </div>
+            </div>
+        </header>
+
+        <div class="container" style="margin-top: 50px;">
+            <div>
+                {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                    <!-- {{ 'layout.logged_in_as'|trans({'%username%': app.user.username}, 'FOSUserBundle') }} |
+                    <a href="{{ path('fos_user_security_logout') }}">
+                        {{ 'layout.logout'|trans({}, 'FOSUserBundle') }}
+                    </a> -->
+                {% else %}
+                    <a href="{{ path('fos_user_security_login') }}">{{ 'layout.login'|trans({}, 'FOSUserBundle') }}</a> or 
+                    <a href="{{ path('fos_user_registration_register') }}">{{ 'layout.register'|trans({}, 'FOSUserBundle') }}</a>
+                {% endif %}
+            </div>
+            {% for key, message in app.session.getFlashes() %}
+            <div class="{{ key }}">
+                {{ message|trans({}, 'FOSUserBundle') }}
+            </div>
+            {% endfor %}
         
-        /* Script */
-        {% block javascripts %}{% endblock %}
+        {% block body %}{% endblock %}
+
+        <!-- {% block javascripts %}
+          <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+          {% javascripts '../app/Resources/public/js/*' %}
+            <script type="text/javascript" src="{{ asset_url }}"></script>
+          {% endjavascripts %}
+        {% endblock %}
+    	 -->
+        </div>
     </body>
 </html>
