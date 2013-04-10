@@ -1,5 +1,7 @@
 {% extends "UserBundle::layout.html.twig" %}
 
+{% block title %}Log in{% endblock title %}
+
 {% block fos_user_content %}
 <div class="span4" style="margin: 0 auto; float: none; margin-top: 10%;">
   <h1 style="text-align: center;">Sign in</h1>
@@ -21,7 +23,7 @@
       <div for="remember_me" style="display:inline;">{{ 'security.login.remember_me'|trans({}, 'FOSUserBundle') }}</div>
       </div>
 
-      <input type="submit" id="_submit" name="_submit" value="{{ 'security.login.submit'|trans({}, 'FOSUserBundle') }}" />
+      <input type="submit" id="_submit" class="btn btn-primary" name="_submit" value="{{ 'security.login.submit'|trans({}, 'FOSUserBundle') }}" />
   </form>
 </div>
 {% endblock fos_user_content %}

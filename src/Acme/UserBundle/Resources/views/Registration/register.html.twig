@@ -1,6 +1,6 @@
 {% extends "UserBundle::layout.html.twig" %}
 
-{% block title %}Change password{% endblock title %}
+{% block title %}Registration{% endblock title %}
 
 {% block stylesheets %}
   {{ parent() }}
@@ -11,9 +11,6 @@
 
 {% block fos_user_content %}
 <div class="span6" style="margin: 0 auto; float: none;">
-  <h1 style="text-align: center; margin-bottom: 20px;">Change password</h1>
-  <div class="span4" style="margin: 0 auto; float: none;">
-    {% include "UserBundle:ChangePassword:changePassword_content.html.twig" %}
-  </div>
-</div>
+  <h1 style="text-align: center; margin-bottom: 20px;">Register</h1>
+{% include "UserBundle:Registration:register_content.html.twig" %}
 {% endblock fos_user_content %}

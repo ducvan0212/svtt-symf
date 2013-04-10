@@ -1,5 +1,17 @@
 {% extends "UserBundle::layout.html.twig" %}
 
+{% block title %}Edit profile{% endblock title %}
+
+{% block stylesheets %}
+  {{ parent() }}
+  {% stylesheets '@UserBundle/Resources/public/css/*' filter='cssrewrite' %}
+    <link rel="stylesheet" href="{{ asset_url }}" />
+  {% endstylesheets %}
+{% endblock %}
+
 {% block fos_user_content %}
+<div class="span6" style="margin: 0 auto; float: none;">
+  <h1 style="text-align: center; margin-bottom: 20px;">Edit profile</h1>
 {% include "UserBundle:Profile:edit_content.html.twig" %}
+</div>
 {% endblock fos_user_content %}
