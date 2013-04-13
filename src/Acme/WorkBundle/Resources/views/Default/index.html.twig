@@ -3,3 +3,12 @@ Hello {{ name }}!
   <div>{{job.title}}</div>
   <div>{{job.contact}}</div>
 {% endfor %}
+
+<br>Last job
+<div>{{last_job.title}}</div>
+<div>{{last_job.contact}}</div>
+
+<br>Languages
+{% for l in languages %}
+  <div>{{l.name}}</div>
+{% endfor %}

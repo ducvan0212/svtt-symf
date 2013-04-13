@@ -41,10 +41,11 @@ class Job
     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
     */
     protected $user;
-	
-	 /**
-     * @ORM\ManyToMany(targetEntity="Acme\WorkBundle\Entity\Language", mappedBy="jobs")
-     **/
+
+    /**
+    * @ORM\ManyToMany(targetEntity="Language", inversedBy="jobs")
+    * @ORM\JoinTable(name="jobs_languages")
+    **/
     private $languages;
 
     public function __construct() {

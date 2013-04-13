@@ -28,10 +28,9 @@ class Language
      */
     private $name;
 
-	 /**
-     * @ORM\ManyToMany(targetEntity="Job", inversedBy="languages")
-     * @ORM\JoinTable(name="languages_jobs")
-     **/
+    /**
+    * @ORM\ManyToMany(targetEntity="Acme\WorkBundle\Entity\Job", mappedBy="languages")
+    **/
     private $jobs;
 	
 	public function __construct() {

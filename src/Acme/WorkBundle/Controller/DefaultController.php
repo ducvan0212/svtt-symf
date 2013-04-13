@@ -21,7 +21,9 @@ class DefaultController extends Controller
     {
         $user = $this->getUser();
         $jobs = $user->getJobs();
-        return array('name' => $name, 'jobs' => $jobs);
+        $last_job = $jobs->last();
+        $languages = $last_job->getLanguages();
+        return array('name' => $name, 'jobs' => $jobs, 'last_job' => $last_job, 'languages' => $languages);
     }
 
 }
