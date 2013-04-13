@@ -41,4 +41,37 @@ class User extends BaseUser
     {
         return $this->id;
     }
+
+    /**
+     * Add jobs
+     *
+     * @param \Acme\WorkBundle\Entity\Job $jobs
+     * @return User
+     */
+    public function addJob(\Acme\WorkBundle\Entity\Job $jobs)
+    {
+        $this->jobs[] = $jobs;
+    
+        return $this;
+    }
+
+    /**
+     * Remove jobs
+     *
+     * @param \Acme\WorkBundle\Entity\Job $jobs
+     */
+    public function removeJob(\Acme\WorkBundle\Entity\Job $jobs)
+    {
+        $this->jobs->removeElement($jobs);
+    }
+
+    /**
+     * Get jobs
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getJobs()
+    {
+        return $this->jobs;
+    }
 }

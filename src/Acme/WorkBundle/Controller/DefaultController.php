@@ -24,40 +24,4 @@ class DefaultController extends Controller
         return array('name' => $name, 'jobs' => $jobs);
     }
 
-    public function createJobAction(Request $request)
-    {
-      if (false === $this->get('security.context')->isGranted('ROLE_USER')) {
-        throw new AccessDeniedException();
-      }
-
-      $job = new Job();
-
-      $form = $this->createFormBuilder($job)
-        ->add('title', 'text')
-        ->add('contact', 'text')
-        ->getForm();
-
-      if ($request->isMethod('POST')) {
-        $form->bind($request);
-        
-        if ($form->isValid()) {
-          $user = $this->getUser();
-          // var_dump($user->getUsername());die();
-          $job->setUser($user);
-
-          $em = $this->getDoctrine()->getManager();
-          $em->persist($job);
-          $em->flush();
-          return new Response('okok'); 
-        } else {
-          return $this->render('AcmeWorkBundle:Default:newJob.html.twig', array(
-            'form' => $form->createView(),
-            ));
-        }
-      } else {
-        return $this->render('AcmeWorkBundle:Default:newJob.html.twig', array(
-            'form' => $form->createView(),
-            ));
-      }
-    }
 }

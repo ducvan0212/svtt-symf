@@ -43,7 +43,7 @@ class Job
     protected $user;
 	
 	 /**
-     * @ORM\ManyToMany(targetEntity="Acme\WorkBundle\Entity\Language", mappedBy="jobs")
+     * @ORM\ManyToMany(targetEntity="Language", mappedBy="jobs")
      **/
     private $languages;
 
