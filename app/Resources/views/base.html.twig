@@ -2,7 +2,7 @@
 <html>
     <head>
         <meta charset="UTF-8" />
-        <title>{% block title %}Welcome!{% endblock %}</title>
+        <title>{% block title %}Welcome to FindMyJob!{% endblock %}</title>
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
         {% block stylesheets %}
             {% stylesheets '../app/Resources/public/css/*' filter='cssrewrite' %}
@@ -15,11 +15,10 @@
         <header class="navbar navbar-fixed-top navbar-inverse">
             <div class="navbar-inner">
                 <div class="container">
-                    <a class="brand" href="#">FindMyJob</a>
+                    <a class="brand" href="{{ path('static_page_home') }}">FindMyJob</a>
                     <ul class="nav pull-left">
-                        <li><a href="#">Home</a></li>
-                        <li><a href="#">About</a></li>
-                        <li><a href="#">Help</a></li>
+                        <li><a href="{{ path('static_page_about') }}">About Us</a></li>
+                        <li><a href="{{ path('static_page_help') }}">Help</a></li>
                     </ul>
                     <ul class="nav pull-right">
                         {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}

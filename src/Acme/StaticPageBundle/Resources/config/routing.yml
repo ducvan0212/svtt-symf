@@ -1,0 +1,9 @@
+static_page_home:
+  path: /home
+  defaults: { _controller: AcmeStaticPageBundle:Default:home }
+static_page_about:
+  path: /about
+  defaults: { _controller: AcmeStaticPageBundle:Default:about }
+static_page_help:
+  path: /help
+  defaults: { _controller: AcmeStaticPageBundle:Default:help }
