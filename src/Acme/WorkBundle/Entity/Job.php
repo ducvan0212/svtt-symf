@@ -67,6 +67,20 @@ class Job
      */
     private $salary;
 
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="otherBenefit", type="text")
+     */
+    private $otherBenefit;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="jobRequirement", type="text")
+     */
+    private $jobRequirement;
+
     public function __construct() {
         $this->languages = new \Doctrine\Common\Collections\ArrayCollection();
         $this->categories = new \Doctrine\Common\Collections\ArrayCollection();
@@ -261,5 +275,51 @@ class Job
     public function getSalary()
     {
         return $this->salary;
+    }
+
+    /**
+     * Set otherBenefit
+     *
+     * @param string $otherBenefit
+     * @return Job
+     */
+    public function setOtherBenefit($otherBenefit)
+    {
+        $this->otherBenefit = $otherBenefit;
+    
+        return $this;
+    }
+
+    /**
+     * Get otherBenefit
+     *
+     * @return string 
+     */
+    public function getOtherBenefit()
+    {
+        return $this->otherBenefit;
+    }
+
+    /**
+     * Set jobRequirement
+     *
+     * @param string $jobRequirement
+     * @return Job
+     */
+    public function setJobRequirement($jobRequirement)
+    {
+        $this->jobRequirement = $jobRequirement;
+    
+        return $this;
+    }
+
+    /**
+     * Get jobRequirement
+     *
+     * @return string 
+     */
+    public function getJobRequirement()
+    {
+        return $this->jobRequirement;
     }
 }

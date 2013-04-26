@@ -51,6 +51,8 @@ class JobController extends Controller
         'property' => 'level',
         'expanded' => true,
         'multiple' => false))
+        ->add('otherBenefit', 'textarea')
+        ->add('jobRequirement', 'textarea')
 	  	  ->getForm();
 
       if ($request->isMethod('POST')) {

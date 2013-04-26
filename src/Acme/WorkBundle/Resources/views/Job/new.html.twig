@@ -13,13 +13,27 @@
   {{ form_label(form.languages) }}
   {{ form_widget(form.languages) }}
 </div>
+
 <div>
   {{ form_label(form.categories) }}
   {{ form_widget(form.categories) }}
 </div>
+
 <div>
-  {{ form_label(form.salary) }}
-  {{ form_widget(form.salary) }}
+  Job Benefit
+  <div>
+    {{ form_label(form.salary) }}
+    {{ form_widget(form.salary) }}
+  </div>
+  <div>
+    {{ form_label(form.otherBenefit, 'Other Benefit') }}
+    {{ form_widget(form.otherBenefit) }}
+  </div>
+</div>
+
+<div>
+  {{ form_label(form.jobRequirement, 'Job Requirement') }}
+  {{ form_widget(form.jobRequirement) }}
 </div>
 {{ form_rest(form) }}
 <input type="submit" />

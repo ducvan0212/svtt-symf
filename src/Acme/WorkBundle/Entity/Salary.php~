@@ -65,4 +65,44 @@ class Salary
     {
         return $this->level;
     }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->job = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+    
+    /**
+     * Add job
+     *
+     * @param \Acme\WorkBundle\Entity\Job $job
+     * @return Salary
+     */
+    public function addJob(\Acme\WorkBundle\Entity\Job $job)
+    {
+        $this->job[] = $job;
+    
+        return $this;
+    }
+
+    /**
+     * Remove job
+     *
+     * @param \Acme\WorkBundle\Entity\Job $job
+     */
+    public function removeJob(\Acme\WorkBundle\Entity\Job $job)
+    {
+        $this->job->removeElement($job);
+    }
+
+    /**
+     * Get job
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getJob()
+    {
+        return $this->job;
+    }
 }
