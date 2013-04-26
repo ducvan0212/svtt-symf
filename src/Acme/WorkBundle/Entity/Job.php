@@ -37,6 +37,13 @@ class Job
     private $contact;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="requiredApplication", type="text")
+     */
+    private $requiredApplication;    
+
+    /**
     * @ORM\ManyToOne(targetEntity="Acme\UserBundle\Entity\User", inversedBy="jobs")
     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
     */
@@ -48,8 +55,21 @@ class Job
     **/
     private $languages;
 
+    /**
+    * @ORM\ManyToMany(targetEntity="Category", inversedBy="jobs")
+    * @ORM\JoinTable(name="jobs_categories")
+    **/
+    private $categories;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Salary", inversedBy="job")
+     * @ORM\JoinColumn(name="salary_id", referencedColumnName="id")
+     */
+    private $salary;
+
     public function __construct() {
         $this->languages = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->categories = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
@@ -162,5 +182,84 @@ class Job
     public function getLanguages()
     {
         return $this->languages;
+    }
+
+    /**
+     * Set requiredApplication
+     *
+     * @param string $requiredApplication
+     * @return Job
+     */
+    public function setRequiredApplication($requiredApplication)
+    {
+        $this->requiredApplication = $requiredApplication;
+    
+        return $this;
+    }
+
+    /**
+     * Get requiredApplication
+     *
+     * @return string 
+     */
+    public function getRequiredApplication()
+    {
+        return $this->requiredApplication;
+    }
+
+    /**
+     * Add categories
+     *
+     * @param \Acme\WorkBundle\Entity\Category $categories
+     * @return Job
+     */
+    public function addCategorie(\Acme\WorkBundle\Entity\Category $categories)
+    {
+        $this->categories[] = $categories;
+    
+        return $this;
+    }
+
+    /**
+     * Remove categories
+     *
+     * @param \Acme\WorkBundle\Entity\Category $categories
+     */
+    public function removeCategorie(\Acme\WorkBundle\Entity\Category $categories)
+    {
+        $this->categories->removeElement($categories);
+    }
+
+    /**
+     * Get categories
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getCategories()
+    {
+        return $this->categories;
+    }
+
+    /**
+     * Set salary
+     *
+     * @param \Acme\WorkBundle\Entity\Salary $salary
+     * @return Job
+     */
+    public function setSalary(\Acme\WorkBundle\Entity\Salary $salary = null)
+    {
+        $this->salary = $salary;
+    
+        return $this;
+    }
+
+    /**
+     * Get salary
+     *
+     * @return \Acme\WorkBundle\Entity\Salary 
+     */
+    public function getSalary()
+    {
+        return $this->salary;
     }
 }

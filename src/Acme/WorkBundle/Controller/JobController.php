@@ -34,13 +34,24 @@ class JobController extends Controller
 
       $form = $this->createFormBuilder($job)
         ->add('title', 'text')
-        ->add('contact', 'text')
+        ->add('contact', 'textarea')
+        ->add('requiredApplication', 'textarea')
         ->add('languages', 'entity', array(
 	  		'class' => 'AcmeWorkBundle:Language',
 	  		'property' => 'name',
 	  		'expanded' => true,
 	  		'multiple' => true))
-	  	->getForm();
+        ->add('categories', 'entity', array(
+        'class' => 'AcmeWorkBundle:Category',
+        'property' => 'name',
+        'expanded' => true,
+        'multiple' => true))
+        ->add('salary', 'entity', array(
+        'class' => 'AcmeWorkBundle:Salary',
+        'property' => 'level',
+        'expanded' => true,
+        'multiple' => false))
+	  	  ->getForm();
 
       if ($request->isMethod('POST')) {
         $form->bind($request);
@@ -55,12 +66,12 @@ class JobController extends Controller
           $em->flush();
           return new Response('okok'); 
         } else {
-          return $this->render('AcmeWorkBundle:Job:newJob.html.twig', array(
+          return $this->render('AcmeWorkBundle:Job:new.html.twig', array(
             'form' => $form->createView(),
             ));
         }
       } else {
-        return $this->render('AcmeWorkBundle:Job:newJob.html.twig', array(
+        return $this->render('AcmeWorkBundle:Job:new.html.twig', array(
             'form' => $form->createView(),
             ));
       }

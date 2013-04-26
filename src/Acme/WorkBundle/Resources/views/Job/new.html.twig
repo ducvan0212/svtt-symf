@@ -1,0 +1,27 @@
+{% extends '::base.html.twig' %}
+
+{% block title %}Create a job{% endblock %}
+
+{% block body %}
+<form action="{{ path('work_createJob') }}" method="post" {{ form_enctype(form) }}>
+{{ form_errors(form) }}
+{{ form_row(form.title) }}
+{{ form_row(form.contact) }}
+{{ form_label(form.requiredApplication, 'Required Application') }}
+{{ form_widget(form.requiredApplication) }}
+<div>
+  {{ form_label(form.languages) }}
+  {{ form_widget(form.languages) }}
+</div>
+<div>
+  {{ form_label(form.categories) }}
+  {{ form_widget(form.categories) }}
+</div>
+<div>
+  {{ form_label(form.salary) }}
+  {{ form_widget(form.salary) }}
+</div>
+{{ form_rest(form) }}
+<input type="submit" />
+</form>
+{% endblock %}
