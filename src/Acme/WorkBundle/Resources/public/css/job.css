@@ -1,3 +1,13 @@
-body {
-  /*background: red;*/
+input[type="checkbox"] {
+  margin-top: 0px;
+}
+
+#form_categories, #form_languages {
+  display: inline-block;
+}
+
+.choice-item {
+  width: 156px;
+  margin: 0px;
+  float: left;
 }
