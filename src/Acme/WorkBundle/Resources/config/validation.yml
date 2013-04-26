@@ -1,0 +1,14 @@
+Acme\WorkBundle\Entity\Job:
+  properties:
+    title:
+      - NotBlank: ~
+    contact:
+      - NotBlank: ~
+    requiredApplication:
+      - NotBlank: ~
+    otherBenefit:
+      - NotBlank: ~
+    jobRequirement:
+      - NotBlank: ~
+    otherDescription:
+      - NotBlank: ~

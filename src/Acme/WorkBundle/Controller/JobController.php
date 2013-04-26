@@ -49,10 +49,16 @@ class JobController extends Controller
         ->add('salary', 'entity', array(
         'class' => 'AcmeWorkBundle:Salary',
         'property' => 'level',
-        'expanded' => true,
+        'expanded' => false,
         'multiple' => false))
         ->add('otherBenefit', 'textarea')
         ->add('jobRequirement', 'textarea')
+        ->add('jobPosition', 'entity', array(
+        'class' => 'AcmeWorkBundle:JobPosition',
+        'property' => 'name',
+        'expanded' => false,
+        'multiple' => false))
+        ->add('otherDescription', 'textarea')
 	  	  ->getForm();
 
       if ($request->isMethod('POST')) {

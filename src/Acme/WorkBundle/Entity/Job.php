@@ -4,6 +4,7 @@ namespace Acme\WorkBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Validator\Constraints\Count;
 
 /**
  * Job
@@ -52,12 +53,14 @@ class Job
     /**
     * @ORM\ManyToMany(targetEntity="Language", inversedBy="jobs")
     * @ORM\JoinTable(name="jobs_languages")
+    * @Count(min = 1, minMessage = "At least one language must be selected")
     **/
     private $languages;
 
     /**
     * @ORM\ManyToMany(targetEntity="Category", inversedBy="jobs")
     * @ORM\JoinTable(name="jobs_categories")
+    * @Count(min = 1, minMessage = "At least one category must be selected")
     **/
     private $categories;
 
@@ -66,6 +69,12 @@ class Job
      * @ORM\JoinColumn(name="salary_id", referencedColumnName="id")
      */
     private $salary;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="JobPosition", inversedBy="job")
+     * @ORM\JoinColumn(name="jobPosition_id", referencedColumnName="id")
+    */
+    private $jobPosition;
 
     /**
      * @var string
@@ -80,6 +89,13 @@ class Job
      * @ORM\Column(name="jobRequirement", type="text")
      */
     private $jobRequirement;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="otherDescription", type="text")
+     */
+    private $otherDescription;
 
     public function __construct() {
         $this->languages = new \Doctrine\Common\Collections\ArrayCollection();
@@ -321,5 +337,51 @@ class Job
     public function getJobRequirement()
     {
         return $this->jobRequirement;
+    }
+
+    /**
+     * Set jobPosition
+     *
+     * @param \Acme\WorkBundle\Entity\JobPosition $jobPosition
+     * @return Job
+     */
+    public function setJobPosition(\Acme\WorkBundle\Entity\JobPosition $jobPosition = null)
+    {
+        $this->jobPosition = $jobPosition;
+    
+        return $this;
+    }
+
+    /**
+     * Get jobPosition
+     *
+     * @return \Acme\WorkBundle\Entity\JobPosition 
+     */
+    public function getJobPosition()
+    {
+        return $this->jobPosition;
+    }
+
+    /**
+     * Set otherDescription
+     *
+     * @param string $otherDescription
+     * @return Job
+     */
+    public function setOtherDescription($otherDescription)
+    {
+        $this->otherDescription = $otherDescription;
+    
+        return $this;
+    }
+
+    /**
+     * Get otherDescription
+     *
+     * @return string 
+     */
+    public function getOtherDescription()
+    {
+        return $this->otherDescription;
     }
 }

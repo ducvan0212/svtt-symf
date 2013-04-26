@@ -2,21 +2,52 @@
 
 {% block title %}Create a job{% endblock %}
 
+{% block stylesheets %}
+  {{ parent() }}
+  {% stylesheets '@AcmeWorkBundle/Resources/public/css/*' filter='cssrewrite' %}
+    <link rel="stylesheet" href="{{ asset_url }}" />
+  {% endstylesheets %}
+{% endblock %}
+
+{% form_theme form _self %}
+
+{% block form_errors %}
+    {% spaceless %}
+        {% if errors|length > 0 %}
+        <ul class="alert alert-error">
+            {% for error in errors %}
+                <li>{{
+                    error.messagePluralization is null
+                        ? error.messageTemplate|trans(error.messageParameters, 'validators')
+                        : error.messageTemplate|transchoice(error.messagePluralization, error.messageParameters, 'validators')
+                }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+    {% endspaceless %}
+{% endblock form_errors %}
+
 {% block body %}
 <form action="{{ path('work_createJob') }}" method="post" {{ form_enctype(form) }}>
 {{ form_errors(form) }}
 {{ form_row(form.title) }}
 {{ form_row(form.contact) }}
-{{ form_label(form.requiredApplication, 'Required Application') }}
-{{ form_widget(form.requiredApplication) }}
-<div>
-  {{ form_label(form.languages) }}
-  {{ form_widget(form.languages) }}
-</div>
 
 <div>
-  {{ form_label(form.categories) }}
-  {{ form_widget(form.categories) }}
+  Job Description
+  <div>
+    {{ form_label(form.categories, 'Job Category') }}
+    {{ form_errors(form.categories) }}
+    {{ form_widget(form.categories) }}
+  </div>
+  <div>
+    {{ form_label(form.jobPosition, 'Job Position')}}
+    {{ form_widget(form.jobPosition) }}
+  </div>
+  <div>
+    {{ form_label(form.otherDescription, 'Other Job Description')}}
+    {{ form_widget(form.otherDescription) }}
+  </div>
 </div>
 
 <div>
@@ -32,8 +63,19 @@
 </div>
 
 <div>
-  {{ form_label(form.jobRequirement, 'Job Requirement') }}
+  Job Requirement
+  <div>
+    {{ form_label(form.languages) }}
+    {{ form_errors(form.languages) }}
+    {{ form_widget(form.languages) }}
+  </div>
+  {{ form_label(form.jobRequirement, 'Other Requirement') }}
   {{ form_widget(form.jobRequirement) }}
+</div>
+
+<div>
+  {{ form_label(form.requiredApplication, 'Required Application') }}
+  {{ form_widget(form.requiredApplication) }}
 </div>
 {{ form_rest(form) }}
 <input type="submit" />
