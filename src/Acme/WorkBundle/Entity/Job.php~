@@ -4,6 +4,7 @@ namespace Acme\WorkBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Validator\Constraints\Count;
 
 /**
  * Job
@@ -44,6 +45,13 @@ class Job
     private $requiredApplication;    
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="address", type="text")
+     */
+    private $address;
+
+    /**
     * @ORM\ManyToOne(targetEntity="Acme\UserBundle\Entity\User", inversedBy="jobs")
     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
     */
@@ -52,12 +60,14 @@ class Job
     /**
     * @ORM\ManyToMany(targetEntity="Language", inversedBy="jobs")
     * @ORM\JoinTable(name="jobs_languages")
+    * @Count(min = 1, minMessage = "At least one language must be selected")
     **/
     private $languages;
 
     /**
     * @ORM\ManyToMany(targetEntity="Category", inversedBy="jobs")
     * @ORM\JoinTable(name="jobs_categories")
+    * @Count(min = 1, minMessage = "At least one category must be selected")
     **/
     private $categories;
 
@@ -70,7 +80,7 @@ class Job
     /**
      * @ORM\ManyToOne(targetEntity="JobPosition", inversedBy="job")
      * @ORM\JoinColumn(name="jobPosition_id", referencedColumnName="id")
-     */
+    */
     private $jobPosition;
 
     /**
@@ -357,5 +367,28 @@ class Job
     public function getJobPosition()
     {
         return $this->jobPosition;
+    }
+
+    /**
+     * Set otherDescription
+     *
+     * @param string $otherDescription
+     * @return Job
+     */
+    public function setOtherDescription($otherDescription)
+    {
+        $this->otherDescription = $otherDescription;
+    
+        return $this;
+    }
+
+    /**
+     * Get otherDescription
+     *
+     * @return string 
+     */
+    public function getOtherDescription()
+    {
+        return $this->otherDescription;
     }
 }

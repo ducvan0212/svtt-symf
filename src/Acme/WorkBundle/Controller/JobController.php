@@ -34,8 +34,9 @@ class JobController extends Controller
 
       $form = $this->createFormBuilder($job)
         ->add('title', 'text')
-        ->add('contact', 'textarea')
+        ->add('contact', 'text')
         ->add('requiredApplication', 'textarea')
+        ->add('address', 'text')
         ->add('languages', 'entity', array(
 	  		'class' => 'AcmeWorkBundle:Language',
 	  		'property' => 'name',

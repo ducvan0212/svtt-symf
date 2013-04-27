@@ -4,10 +4,63 @@ input[type="checkbox"] {
 
 #form_categories, #form_languages {
   display: inline-block;
+  padding-left: 20px;
 }
 
 .choice-item {
-  width: 156px;
+  width: 176px;
   margin: 0px;
   float: left;
+}
+
+.job-feature {
+  background: #eeeeee;
+  margin-bottom: 20px;
+  padding: 8px;
+  border-radius: 5px;
+}
+
+.job-feature-label {
+  font-size: 1.5em;
+  font-weight: bold;
+  margin-bottom: 10px;
+  padding-top: 3px;
+}
+
+.job-feature-detail {
+  padding-left: 20px;
+  margin-bottom: 10px;
+}
+
+.subfeature-label {
+  font-weight: bold;
+}
+
+textarea {
+  width: 865px;
+  height: 100px;
+  resize: none;
+}
+
+input[type="text"] {
+  width: 865px;
+}
+
+input[type="submit"] {
+  margin-bottom: 20px;
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.alert {
+  margin: 0px;
+  margin-bottom: 10px;
+  width: 830px;
+}
+
+select {
+  width: 300px;
 }

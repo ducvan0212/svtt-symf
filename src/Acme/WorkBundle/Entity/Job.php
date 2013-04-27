@@ -45,6 +45,13 @@ class Job
     private $requiredApplication;    
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="address", type="text")
+     */
+    private $address;
+
+    /**
     * @ORM\ManyToOne(targetEntity="Acme\UserBundle\Entity\User", inversedBy="jobs")
     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
     */
@@ -383,5 +390,28 @@ class Job
     public function getOtherDescription()
     {
         return $this->otherDescription;
+    }
+
+    /**
+     * Set address
+     *
+     * @param string $address
+     * @return Job
+     */
+    public function setAddress($address)
+    {
+        $this->address = $address;
+    
+        return $this;
+    }
+
+    /**
+     * Get address
+     *
+     * @return string 
+     */
+    public function getAddress()
+    {
+        return $this->address;
     }
 }
