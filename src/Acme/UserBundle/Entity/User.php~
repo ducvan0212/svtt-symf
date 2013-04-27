@@ -24,6 +24,10 @@ class User extends BaseUser
     */
     protected $jobs;
 
+    /**
+    * @ORM\OneToMany(targetEntity="Acme\WorkBundle\Entity\Resume", mappedBy="user")
+    */
+    protected $resumes;
 
     public function __construct()
     {

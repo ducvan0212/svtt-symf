@@ -420,4 +420,27 @@ class Job
     {
         return $this->address;
     }
+
+    /**
+     * Set location
+     *
+     * @param \Acme\WorkBundle\Entity\Location $location
+     * @return Job
+     */
+    public function setLocation(\Acme\WorkBundle\Entity\Location $location = null)
+    {
+        $this->location = $location;
+    
+        return $this;
+    }
+
+    /**
+     * Get location
+     *
+     * @return \Acme\WorkBundle\Entity\Location 
+     */
+    public function getLocation()
+    {
+        return $this->location;
+    }
 }

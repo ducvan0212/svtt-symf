@@ -67,7 +67,7 @@ class Job
     /**
     * @ORM\ManyToMany(targetEntity="Category", inversedBy="jobs")
     * @ORM\JoinTable(name="jobs_categories")
-    * @Count(min = 1, minMessage = "At least one category must be selected")
+    * @Count(min = 1, max = 4, minMessage = "At least one category must be selected", maxMessage = " |You cannot specify more than 5 categories")
     **/
     private $categories;
 

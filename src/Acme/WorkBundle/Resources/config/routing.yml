@@ -1,6 +1,17 @@
 test_association:
   path: /hello/{name}
   defaults: {_controller: AcmeWorkBundle:Default:index }
+
 work_createJob:
   path: /job/create
   defaults: { _controller: AcmeWorkBundle:Job:create }
+
+work_createResume:
+  path: /resume/create
+  defaults: { _controller: AcmeWorkBundle:Resume:create }
+work_indexResume:
+  path: /resume/index
+  defaults: { _controller: AcmeWorkBundle:Resume:index }
+work_showResume:
+  path: /resume/show/{id}
+  defaults: { _controller: AcmeWorkBundle:Resume:show }

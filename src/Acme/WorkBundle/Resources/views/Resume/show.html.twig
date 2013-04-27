@@ -1,0 +1,18 @@
+{% extends '::base.html.twig' %}
+
+{% block title %}Show a resume{% endblock %}
+
+{% block stylesheets %}
+  {{ parent() }}
+  {% stylesheets '@AcmeWorkBundle/Resources/public/css/*' filter='cssrewrite' %}
+    <link rel="stylesheet" href="{{ asset_url }}" />
+  {% endstylesheets %}
+{% endblock %}
+
+{% block body %}
+  <h1>Your resume</h1>
+  resume {{ resume.id }}:
+      {{ resume.location.name }}
+      {{ resume.salary.level }}
+      <br>
+{% endblock %}

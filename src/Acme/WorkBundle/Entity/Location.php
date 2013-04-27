@@ -34,6 +34,11 @@ class Location
     protected $jobs;
 
     /**
+    * @ORM\OneToMany(targetEntity="Resume", mappedBy="location")
+    */
+    protected $resumes;
+
+    /**
      * Get id
      *
      * @return integer 
@@ -104,5 +109,38 @@ class Location
     public function getJobs()
     {
         return $this->jobs;
+    }
+
+    /**
+     * Add resumes
+     *
+     * @param \Acme\WorkBundle\Entity\Resume $resumes
+     * @return Location
+     */
+    public function addResume(\Acme\WorkBundle\Entity\Resume $resumes)
+    {
+        $this->resumes[] = $resumes;
+    
+        return $this;
+    }
+
+    /**
+     * Remove resumes
+     *
+     * @param \Acme\WorkBundle\Entity\Resume $resumes
+     */
+    public function removeResume(\Acme\WorkBundle\Entity\Resume $resumes)
+    {
+        $this->resumes->removeElement($resumes);
+    }
+
+    /**
+     * Get resumes
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getResumes()
+    {
+        return $this->resumes;
     }
 }

@@ -34,6 +34,11 @@ class Salary
     private $job;
 
     /**
+     * @ORM\OneToMany(targetEntity="Resume", mappedBy="salary")
+     */
+    private $resume;
+
+    /**
      * Get id
      *
      * @return integer 
@@ -104,5 +109,38 @@ class Salary
     public function getJob()
     {
         return $this->job;
+    }
+
+    /**
+     * Add resume
+     *
+     * @param \Acme\WorkBundle\Entity\Resume $resume
+     * @return Salary
+     */
+    public function addResume(\Acme\WorkBundle\Entity\Resume $resume)
+    {
+        $this->resume[] = $resume;
+    
+        return $this;
+    }
+
+    /**
+     * Remove resume
+     *
+     * @param \Acme\WorkBundle\Entity\Resume $resume
+     */
+    public function removeResume(\Acme\WorkBundle\Entity\Resume $resume)
+    {
+        $this->resume->removeElement($resume);
+    }
+
+    /**
+     * Get resume
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getResume()
+    {
+        return $this->resume;
     }
 }

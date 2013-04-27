@@ -1,6 +1,6 @@
 {% extends '::base.html.twig' %}
 
-{% block title %}Public a job{% endblock %}
+{% block title %}Create a resume{% endblock %}
 
 {% block stylesheets %}
   {{ parent() }}
@@ -41,35 +41,11 @@
 {% endblock %}
 
 {% block body %}
-<h1>Public a job</h1>
-<form action="{{ path('work_createJob') }}" method="post" {{ form_enctype(form) }}>
+<h1>Create a resume</h1>
+<form action="{{ path('work_createResume') }}" method="post" {{ form_enctype(form) }}>
 {{ form_errors(form) }}
 
-<div class="job-feature">
-  {{ form_label(form.title, 'Title', { 'label_attr': {'class': 'job-feature-label'} }) }}
-  <div class="job-feature-detail">
-    {{ form_errors(form.title) }}
-    {{ form_widget(form.title) }}
-  </div>
-</div>
-
-<div class="job-feature">
-  {{ form_label(form.contact, 'Employer Contact (phone number, email, etc)', { 'label_attr': {'class': 'job-feature-label'} }) }}
-  <div class="job-feature-detail">
-    {{ form_errors(form.contact) }}
-    {{ form_widget(form.contact) }}
-  </div>
-</div>
-
 <div class="controls controls-row">
-  <div class="job-feature span8">
-    {{ form_label(form.address, 'Company address', { 'label_attr': {'class': 'job-feature-label'} }) }}
-    <div class="job-feature-detail">
-      {{ form_errors(form.address) }}
-      {{ form_widget(form.address) }}
-    </div>
-  </div>
-
   <div class="job-feature for-fit">
     {{ form_label(form.location, 'Location', { 'label_attr': {'class': 'job-feature-label'} }) }}
     <div class="job-feature-detail">
@@ -90,10 +66,6 @@
     {{ form_label(form.jobPosition, 'Job Position', { 'label_attr': {'class': 'subfeature-label'} }) }}
     {{ form_widget(form.jobPosition) }}
   </div>
-  <div class="job-feature-detail">
-    {{ form_label(form.otherDescription, 'Other Job Description', { 'label_attr': {'class': 'subfeature-label'} }) }}
-    {{ form_widget(form.otherDescription) }}
-  </div>
 </div>
 
 <div class="job-feature">
@@ -101,10 +73,6 @@
   <div class="job-feature-detail">
     {{ form_label(form.salary, 'Salary', { 'label_attr': {'class': 'subfeature-label'} }) }}
     {{ form_widget(form.salary) }}
-  </div>
-  <div class="job-feature-detail">
-    {{ form_label(form.otherBenefit, 'Other Benefit', { 'label_attr': {'class': 'subfeature-label'} }) }}
-    {{ form_widget(form.otherBenefit) }}
   </div>
 </div>
 
@@ -115,18 +83,8 @@
     {{ form_errors(form.languages) }}
     {{ form_widget(form.languages) }}
   </div>
-  <div class="job-feature-detail">
-    {{ form_label(form.jobRequirement, 'Other Requirement', { 'label_attr': {'class': 'subfeature-label'} }) }}
-    {{ form_widget(form.jobRequirement) }}
-  </div>
 </div>
 
-<div class="job-feature">
-  {{ form_label(form.requiredApplication, 'Required Application', { 'label_attr': {'class': 'job-feature-label'} }) }}
-  <div class="job-feature-detail">
-    {{ form_widget(form.requiredApplication) }}
-  </div>
-</div>
 {{ form_rest(form) }}
 <input type="submit" class="btn btn-primary btn-large offset5" style="margin-top: 20px;"/>
 </form>

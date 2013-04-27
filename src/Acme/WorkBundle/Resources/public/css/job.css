@@ -74,9 +74,9 @@ select {
 }
 
 .for-fit {
-  width: 270px;
+  width: 286px;
   float: left;
-  margin-left: 18px !important;
+  margin-left: 1px !important;
 }
 
 .controls .for-fit .job-feature-detail select {
