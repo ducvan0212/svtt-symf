@@ -15,3 +15,6 @@ work_indexResume:
 work_showResume:
   path: /resume/show/{id}
   defaults: { _controller: AcmeWorkBundle:Resume:show }
+work_updateResume:
+  path: /resume/update/{id}
+  defaults: { _controller: AcmeWorkBundle:Resume:update }
