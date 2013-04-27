@@ -15,7 +15,7 @@ input[type="checkbox"] {
 
 .job-feature {
   background: #eeeeee;
-  margin-bottom: 20px;
+  margin-bottom: 1px;
   padding: 8px;
   border-radius: 5px;
 }
@@ -63,4 +63,22 @@ h1 {
 
 select {
   width: 300px;
+}
+
+.controls .job-feature {
+  margin-left: 0px;
+}
+
+.controls .job-feature .job-feature-detail input[type="text"] {
+  width: 560px;
+}
+
+.for-fit {
+  width: 270px;
+  float: left;
+  margin-left: 18px !important;
+}
+
+.controls .for-fit .job-feature-detail select {
+  width: 230px;
 }

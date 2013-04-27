@@ -104,6 +104,12 @@ class Job
      */
     private $otherDescription;
 
+    /**
+    * @ORM\ManyToOne(targetEntity="Location", inversedBy="jobs")
+    * @ORM\JoinColumn(name="location_id", referencedColumnName="id")
+    */
+    protected $location;
+
     public function __construct() {
         $this->languages = new \Doctrine\Common\Collections\ArrayCollection();
         $this->categories = new \Doctrine\Common\Collections\ArrayCollection();
@@ -390,5 +396,28 @@ class Job
     public function getOtherDescription()
     {
         return $this->otherDescription;
+    }
+
+    /**
+     * Set address
+     *
+     * @param string $address
+     * @return Job
+     */
+    public function setAddress($address)
+    {
+        $this->address = $address;
+    
+        return $this;
+    }
+
+    /**
+     * Get address
+     *
+     * @return string 
+     */
+    public function getAddress()
+    {
+        return $this->address;
     }
 }

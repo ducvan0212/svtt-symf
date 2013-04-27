@@ -104,6 +104,12 @@ class Job
      */
     private $otherDescription;
 
+    /**
+    * @ORM\ManyToOne(targetEntity="Location", inversedBy="jobs")
+    * @ORM\JoinColumn(name="location_id", referencedColumnName="id")
+    */
+    protected $location;
+
     public function __construct() {
         $this->languages = new \Doctrine\Common\Collections\ArrayCollection();
         $this->categories = new \Doctrine\Common\Collections\ArrayCollection();
@@ -413,5 +419,28 @@ class Job
     public function getAddress()
     {
         return $this->address;
+    }
+
+    /**
+     * Set location
+     *
+     * @param \Acme\WorkBundle\Entity\Location $location
+     * @return Job
+     */
+    public function setLocation(\Acme\WorkBundle\Entity\Location $location = null)
+    {
+        $this->location = $location;
+    
+        return $this;
+    }
+
+    /**
+     * Get location
+     *
+     * @return \Acme\WorkBundle\Entity\Location 
+     */
+    public function getLocation()
+    {
+        return $this->location;
     }
 }

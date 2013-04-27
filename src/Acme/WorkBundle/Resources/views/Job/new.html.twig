@@ -61,12 +61,21 @@
   </div>
 </div>
 
+<div class="controls controls-row">
+  <div class="job-feature span8">
+    {{ form_label(form.address, 'Company address', { 'label_attr': {'class': 'job-feature-label'} }) }}
+    <div class="job-feature-detail">
+      {{ form_errors(form.address) }}
+      {{ form_widget(form.address) }}
+    </div>
+  </div>
 
-<div class="job-feature">
-  {{ form_label(form.address, 'Company address', { 'label_attr': {'class': 'job-feature-label'} }) }}
-  <div class="job-feature-detail">
-    {{ form_errors(form.address) }}
-    {{ form_widget(form.address) }}
+  <div class="job-feature for-fit">
+    {{ form_label(form.location, 'Location', { 'label_attr': {'class': 'job-feature-label'} }) }}
+    <div class="job-feature-detail">
+      {{ form_errors(form.location) }}
+      {{ form_widget(form.location) }}
+    </div>
   </div>
 </div>
 
@@ -119,6 +128,6 @@
   </div>
 </div>
 {{ form_rest(form) }}
-<input type="submit" class="btn btn-primary btn-large offset5"/>
+<input type="submit" class="btn btn-primary btn-large offset5" style="margin-top: 20px;"/>
 </form>
 {% endblock %}

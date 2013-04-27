@@ -59,6 +59,11 @@ class JobController extends Controller
         'property' => 'name',
         'expanded' => false,
         'multiple' => false))
+        ->add('location', 'entity', array(
+        'class' => 'AcmeWorkBundle:Location',
+        'property' => 'name',
+        'expanded' => false,
+        'multiple' => false))
         ->add('otherDescription', 'textarea')
 	  	  ->getForm();
 
