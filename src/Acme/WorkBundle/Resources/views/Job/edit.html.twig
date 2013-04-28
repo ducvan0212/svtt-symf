@@ -1,0 +1,133 @@
+{% extends '::base.html.twig' %}
+
+{% block title %}Edit a job{% endblock %}
+
+{% block stylesheets %}
+  {{ parent() }}
+  {% stylesheets '@AcmeWorkBundle/Resources/public/css/*' filter='cssrewrite' %}
+    <link rel="stylesheet" href="{{ asset_url }}" />
+  {% endstylesheets %}
+{% endblock %}
+
+{% form_theme form _self %}
+
+{% block form_errors %}
+    {% spaceless %}
+        {% if errors|length > 0 %}
+        <div class="alert alert-error">
+            {% for error in errors %}
+                <div>{{
+                    error.messagePluralization is null
+                        ? error.messageTemplate|trans(error.messageParameters, 'validators')
+                        : error.messageTemplate|transchoice(error.messagePluralization, error.messageParameters, 'validators')
+                }}</div>
+            {% endfor %}
+        </div>
+        {% endif %}
+    {% endspaceless %}
+{% endblock form_errors %}
+
+{% block choice_widget_expanded %}
+{% spaceless %}
+<div {{ block('widget_container_attributes') }}>
+{% for child in form %}
+    <label class="choice-item">
+        {{ form_widget(child, {'attr': {'class': attr.widget_class|default('')}}) }}
+        {{ child.vars.label|trans({}, translation_domain) }}<br>
+    </label>
+{% endfor %}
+</div>
+{% endspaceless %}
+{% endblock %}
+
+{% block body %}
+<h1>Edit a job</h1>
+<form action="{{ path('work_updateJob', { 'id': job.id }) }}" method="post" {{ form_enctype(form) }}>
+{{ form_errors(form) }}
+
+<div class="job-feature">
+  {{ form_label(form.title, 'Title', { 'label_attr': {'class': 'job-feature-label'} }) }}
+  <div class="job-feature-detail">
+    {{ form_errors(form.title) }}
+    {{ form_widget(form.title) }}
+  </div>
+</div>
+
+<div class="job-feature">
+  {{ form_label(form.contact, 'Employer Contact (phone number, email, etc)', { 'label_attr': {'class': 'job-feature-label'} }) }}
+  <div class="job-feature-detail">
+    {{ form_errors(form.contact) }}
+    {{ form_widget(form.contact) }}
+  </div>
+</div>
+
+<div class="controls controls-row">
+  <div class="job-feature span8">
+    {{ form_label(form.address, 'Company address', { 'label_attr': {'class': 'job-feature-label'} }) }}
+    <div class="job-feature-detail">
+      {{ form_errors(form.address) }}
+      {{ form_widget(form.address) }}
+    </div>
+  </div>
+
+  <div class="job-feature for-fit">
+    {{ form_label(form.location, 'Location', { 'label_attr': {'class': 'job-feature-label'} }) }}
+    <div class="job-feature-detail">
+      {{ form_errors(form.location) }}
+      {{ form_widget(form.location) }}
+    </div>
+  </div>
+</div>
+
+<div class="job-feature">
+  <div class="job-feature-label">Job Description</div>
+  <div class="job-feature-detail">
+    {{ form_label(form.categories, 'Job Category', { 'label_attr': {'class': 'subfeature-label'} }) }}
+    {{ form_errors(form.categories) }}
+    {{ form_widget(form.categories) }}
+  </div>
+  <div class="job-feature-detail">
+    {{ form_label(form.jobPosition, 'Job Position', { 'label_attr': {'class': 'subfeature-label'} }) }}
+    {{ form_widget(form.jobPosition) }}
+  </div>
+  <div class="job-feature-detail">
+    {{ form_label(form.otherDescription, 'Other Job Description', { 'label_attr': {'class': 'subfeature-label'} }) }}
+    {{ form_widget(form.otherDescription) }}
+  </div>
+</div>
+
+<div class="job-feature">
+  <div class="job-feature-label">Job Benefit</div>
+  <div class="job-feature-detail">
+    {{ form_label(form.salary, 'Salary', { 'label_attr': {'class': 'subfeature-label'} }) }}
+    {{ form_widget(form.salary) }}
+  </div>
+  <div class="job-feature-detail">
+    {{ form_label(form.otherBenefit, 'Other Benefit', { 'label_attr': {'class': 'subfeature-label'} }) }}
+    {{ form_widget(form.otherBenefit) }}
+  </div>
+</div>
+
+<div class="job-feature">
+  <div class="job-feature-label">Job Requirement</div>
+  <div class="job-feature-detail">
+    {{ form_label(form.languages, 'Prefered Languages', { 'label_attr': {'class': 'subfeature-label'} }) }}
+    {{ form_errors(form.languages) }}
+    {{ form_widget(form.languages) }}
+  </div>
+  <div class="job-feature-detail">
+    {{ form_label(form.jobRequirement, 'Other Requirement', { 'label_attr': {'class': 'subfeature-label'} }) }}
+    {{ form_widget(form.jobRequirement) }}
+  </div>
+</div>
+
+<div class="job-feature">
+  {{ form_label(form.requiredApplication, 'Required Application', { 'label_attr': {'class': 'job-feature-label'} }) }}
+  <div class="job-feature-detail">
+    {{ form_widget(form.requiredApplication) }}
+  </div>
+</div>
+{{ form_rest(form) }}
+<input type="submit" class="btn btn-primary btn-large offset5" style="margin-top: 20px;"/>
+</form>
+{% endblock %}

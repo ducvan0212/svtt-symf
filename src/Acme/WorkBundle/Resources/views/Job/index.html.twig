@@ -1,0 +1,18 @@
+{% extends '::base.html.twig' %}
+
+{% block title %}Create a resume{% endblock %}
+
+{% block stylesheets %}
+  {{ parent() }}
+  {% stylesheets '@AcmeWorkBundle/Resources/public/css/*' filter='cssrewrite' %}
+    <link rel="stylesheet" href="{{ asset_url }}" />
+  {% endstylesheets %}
+{% endblock %}
+
+{% block body %}
+  <h1>Your jobs</h1>
+  {% for job in jobs %}
+    <a href="{{ path('work_showJob', { 'id': job.id }) }}">job {{ job.id }}</a>
+    <br>
+  {% endfor %}
+{% endblock %}

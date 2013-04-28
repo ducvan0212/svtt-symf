@@ -15,4 +15,10 @@
       {{ resume.location.name }}
       {{ resume.salary.level }}
       <br>
+
+  <h1>Recommend jobs</h1>
+    {% for job in jobs %}
+      <a href="{{ path('work_showJob', { 'id': job.id }) }}">job {{ job.id }}</a>
+      <br>
+    {% endfor %}
 {% endblock %}

@@ -5,6 +5,15 @@ test_association:
 work_createJob:
   path: /job/create
   defaults: { _controller: AcmeWorkBundle:Job:create }
+work_indexJob:
+  path: /job/index
+  defaults: { _controller: AcmeWorkBundle:Job:index }
+work_showJob:
+  path: /job/show/{id}
+  defaults: { _controller: AcmeWorkBundle:Job:show }
+work_updateJob:
+  path: /job/update/{id}
+  defaults: { _controller: AcmeWorkBundle:Job:update }
 
 work_createResume:
   path: /resume/create

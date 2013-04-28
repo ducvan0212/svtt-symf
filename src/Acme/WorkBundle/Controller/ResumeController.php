@@ -8,6 +8,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
+use Doctrine\Common\Collections\ArrayCollection;
 
 use Acme\WorkBundle\Entity\Resume;
 
@@ -106,8 +107,28 @@ class ResumeController extends Controller
           'No resume found'
         );
       }
+      $a = $this->getDoctrine()
+          ->getRepository('AcmeWorkBundle:Job')
+          ->findBy(
+            array('location' => $resume->getLocation())
+          );
+      $jobs = new \Doctrine\Common\Collections\ArrayCollection($a);
+      $iterator = $jobs->getIterator();
+      $iterator->uasort(function ($first, $second) {
+        if ($first === $second) {
+          return 0;
+        }
+        return $first->getID() > $second->getID() ? -1 : 1;
+      });
+
+      foreach ($iterator as $key => $value) {
+        $i = $value->getID();
+        print("ite $key: $i<br>");
+      }
+
       return $this->render('AcmeWorkBundle:Resume:show.html.twig', array(
             'resume' => $resume,
+            'jobs' => $iterator,
             ));
     }
 

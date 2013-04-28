@@ -1,0 +1,27 @@
+{% extends '::base.html.twig' %}
+
+{% block title %}Show a job{% endblock %}
+
+{% block stylesheets %}
+  {{ parent() }}
+  {% stylesheets '@AcmeWorkBundle/Resources/public/css/*' filter='cssrewrite' %}
+    <link rel="stylesheet" href="{{ asset_url }}" />
+  {% endstylesheets %}
+{% endblock %}
+
+{% block body %}
+  <h1>Your job</h1>
+  job {{ job.id }}:<br>
+      title: {{ job.title }}<br>
+      contact: {{ job.contact }}<br>
+      required application: {{ job.requiredApplication }}<br>
+      address: {{ job.address }}<br>
+      {# job.languages #}
+      {# job.categories #}
+      salary: {{ job.salary.level }}<br>
+      job position: {{ job.jobPosition.name }}<br>
+      other benefit: {{ job.otherBenefit }}<br>
+      job requirement: {{ job.jobRequirement }}<br>
+      other description: {{ job.otherDescription }}<br>
+      location: {{ job.location.name }}<br>
+{% endblock %}
