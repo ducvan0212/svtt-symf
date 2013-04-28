@@ -107,28 +107,30 @@ class ResumeController extends Controller
           'No resume found'
         );
       }
-      $a = $this->getDoctrine()
+      $relatedJobs = $this->getDoctrine()
           ->getRepository('AcmeWorkBundle:Job')
           ->findBy(
             array('location' => $resume->getLocation())
           );
-      $jobs = new \Doctrine\Common\Collections\ArrayCollection($a);
-      $iterator = $jobs->getIterator();
-      $iterator->uasort(function ($first, $second) {
+      // convert array of Job to collection array of job
+      $convertedJobs = new \Doctrine\Common\Collections\ArrayCollection($relatedJobs);
+      // get iterator
+      $orderedJobs = $convertedJobs->getIterator();
+      // really sorted collection array
+      $orderedJobs->uasort(function ($first, $second) {
         if ($first === $second) {
           return 0;
         }
-        return $first->getID() > $second->getID() ? -1 : 1;
+        $i1 = $first->getID(); $i2 = $second->getID();
+        $i3 = $first->getTitle(); $i4 = $second->getTitle();
+        print("first: $i1, second: $i2<br>first: $i3, second: $i4<br>");
+        
+        return $first->getID() < $second->getID() ? -1 : 1;
       });
-
-      foreach ($iterator as $key => $value) {
-        $i = $value->getID();
-        print("ite $key: $i<br>");
-      }
 
       return $this->render('AcmeWorkBundle:Resume:show.html.twig', array(
             'resume' => $resume,
-            'jobs' => $iterator,
+            'jobs' => $orderedJobs,
             ));
     }
 
