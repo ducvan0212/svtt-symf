@@ -124,11 +124,11 @@ class ResumeController extends Controller
           return 0;
         }
         $i1 = $first->getID(); $i2 = $second->getID();
-        $i3 = $first->getTitle(); $i4 = $second->getTitle();
-        $i5 = $first->estimator($resume);
-        print("first: $i1, second: $i2<br>first: $i3, second: $i4<br>$i5<br>");
+        $i3 = $first->estimator($resume);
+        $i4 = $second->estimator($resume);
+        print("first: $i1, second: $i2<br>es first: $i3, es second: $i4<br>");
         
-        return $first->getID() < $second->getID() ? -1 : 1;
+        return $first->estimator($resume) > $second->estimator($resume) ? -1 : 1;
       });
 
       return $this->render('AcmeWorkBundle:Resume:show.html.twig', array(

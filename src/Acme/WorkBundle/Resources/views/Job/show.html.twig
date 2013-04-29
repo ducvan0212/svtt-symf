@@ -16,8 +16,19 @@
       contact: {{ job.contact }}<br>
       required application: {{ job.requiredApplication }}<br>
       address: {{ job.address }}<br>
-      {# job.languages #}
-      {# job.categories #}
+      languages:
+        <ul> 
+        {% for la in job.languages %}
+          <li>{{ la.name }}</li>
+        {% endfor %}
+        </ul>
+      categories:
+        <ul> 
+        {% for ca in job.categories %}
+          <li>{{ ca.name }}</li>
+        {% endfor %}
+        </ul>
+      
       salary: {{ job.salary.level }}<br>
       job position: {{ job.jobPosition.name }}<br>
       other benefit: {{ job.otherBenefit }}<br>

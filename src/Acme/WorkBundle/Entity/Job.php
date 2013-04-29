@@ -445,6 +445,58 @@ class Job
     }
 
     public function estimator(\Acme\WorkBundle\Entity\Resume $resume) {
-        return $resume->getSalary()->getID();
+        $eLanguage = $this->estimateLanguages($resume);
+        $eCategory = $this->estimateCategories($resume);
+        $eSalary = $this->estimateSalary($resume);
+        $eJobPosition = $this->estimateJobPosition($resume);
+        $jobid = $this->getID();
+        $e = $eLanguage + $eCategory + $eSalary + $eJobPosition;
+        // print("job: $jobid | eLanguage: $eLanguage<br>");
+        // print("job: $jobid | eCategory: $eCategory<br>");
+        // print("job: $jobid | eSalary: $eSalary<br>");
+        // print("job: $jobid | eJobPosition: $eJobPosition<br>");
+        // print("job: $jobid | e: $e<br>");
+        return $e;
+    }
+
+    // trong so 1->5. Cang to cang quan trong
+    public function estimateLanguages(\Acme\WorkBundle\Entity\Resume $resume) {
+        $counter = 0;
+        $alpha = 4;
+        foreach ($resume->getLanguages() as $language) {
+            if ($this->getLanguages()->contains($language)) {
+                $counter++;
+            }
+        }
+        return $counter;
+    }
+
+    public function estimateCategories(\Acme\WorkBundle\Entity\Resume $resume) {
+        $counter = 0;
+        $alpha = 2;
+        foreach ($resume->getCategories() as $category) {
+            if ($this->getCategories()->contains($category)) {
+                $counter++;
+            }
+        }
+        return $counter;
+    }
+
+    public function estimateSalary(\Acme\WorkBundle\Entity\Resume $resume) {
+        $counter = 0;
+        $alpha = 5;
+        if ($this->getSalary()->getId() == $resume->getSalary()->getId()) {
+            return 1;
+        }
+        return $counter;
+    }
+
+    public function estimateJobPosition(\Acme\WorkBundle\Entity\Resume $resume) {
+        $counter = 0;
+        $alpha = 2;
+        if ($this->getJobPosition()->getId() == $resume->getJobPosition()->getId()) {
+            return 1;
+        }
+        return $counter;
     }
 }
