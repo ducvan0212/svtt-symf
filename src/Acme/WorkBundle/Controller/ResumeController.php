@@ -117,13 +117,16 @@ class ResumeController extends Controller
       // get iterator
       $orderedJobs = $convertedJobs->getIterator();
       // really sorted collection array
-      $orderedJobs->uasort(function ($first, $second) {
+      // dung & de reference
+      // $orderedJobs->uasort(function ($first, $second) use( &$resume) {
+      $orderedJobs->uasort(function ($first, $second) use( $resume) {
         if ($first === $second) {
           return 0;
         }
         $i1 = $first->getID(); $i2 = $second->getID();
         $i3 = $first->getTitle(); $i4 = $second->getTitle();
-        print("first: $i1, second: $i2<br>first: $i3, second: $i4<br>");
+        $i5 = $first->estimator($resume);
+        print("first: $i1, second: $i2<br>first: $i3, second: $i4<br>$i5<br>");
         
         return $first->getID() < $second->getID() ? -1 : 1;
       });

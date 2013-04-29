@@ -443,4 +443,8 @@ class Job
     {
         return $this->location;
     }
+
+    public function estimator(\Acme\WorkBundle\Entity\Resume $resume) {
+        return $resume->getSalary()->getID();
+    }
 }
