@@ -11,8 +11,52 @@
 
 {% block body %}
   <h1>Your published jobs</h1>
-  {% for job in jobs %}
-    <a href="{{ path('work_showJob', { 'id': job.id }) }}">job {{ job.id }}</a>
-    <br>
-  {% endfor %}
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th>Job Title</th>
+        <th>Salary</th>
+        <th>Job position</th>
+        <th>Job Categories</th>
+        <th>Prefered Language</th>
+        <th>Needed</th>
+        <th>Recruited</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for job in jobs %}
+      <tr>
+        <td>
+          <a href="{{ path('work_showJob', { 'id': job.id }) }}">{{ job.title }}</a>
+        </td>
+        <td>{{ job.salary.level }}</td>
+        <td>{{ job.jobPosition.name }}</td>
+        <td>
+          <ul>
+            {% for ca in job.categories %}
+              <li>{{ ca.name }}</li>
+            {% endfor %}
+          </ul>
+        </td>
+        <td>
+          <ul>
+            {% for la in job.languages %}
+              <li>{{ la.name }}</li>
+            {% endfor %}
+          </ul>
+        </td>
+        <td>
+          {{ job.neededNumber }}
+        </td>
+        <td>
+          {{ job.recruitedNumber }}
+        </td>
+        <td>
+          <a href="{{ path('work_updateJob', { 'id': job.id }) }}">update</a>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
 {% endblock %}

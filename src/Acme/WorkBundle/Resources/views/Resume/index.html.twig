@@ -20,6 +20,7 @@
           <th>Job position</th>
           <th>Job Categories</th>
           <th>Prefered Language</th>
+          <th></th>
         </tr>
       </thead>
       <tbody>
@@ -42,6 +43,9 @@
                 <li>{{ la.name }}</li>
               {% endfor %}
             </ul>
+          </td>
+          <td>
+            <a href="{{ path('work_updateResume', { 'id': resume.id }) }}">Update</a>
           </td>
         </tr>
       {% endfor %}

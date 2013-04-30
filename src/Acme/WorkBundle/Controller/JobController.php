@@ -30,6 +30,11 @@ class JobController extends Controller
         throw new AccessDeniedException();
       }
 
+      $user = $this->getUser();
+      if ($user->getIsEmployer() === false) {
+        throw new AccessDeniedException();
+      }
+
       $job = new Job();
 
       $form = $this->createFormBuilder($job)
@@ -73,8 +78,6 @@ class JobController extends Controller
         $form->bind($request);
         
         if ($form->isValid()) {
-          $user = $this->getUser();
-          // var_dump($user->getUsername());die();
           $job->setUser($user);
 
           $em = $this->getDoctrine()->getManager();
@@ -140,7 +143,8 @@ class JobController extends Controller
         );
       }
 
-      if ($job->getUser()->getId() != $this->getUser()->getId()) {
+      $user = $this->getUser();
+      if ($job->getUser()->getId() != $user->getId()) {
         throw new AccessDeniedException();
       }
 

@@ -11,6 +11,8 @@
 
 {% block body %}
     <div>
+      <a href="{{ path('work_indexResume') }}" class="btn btn-primary">{{ 'Back' }}</a>
+      <a href="{{ path('work_updateResume', { 'id': resume.id }) }}" class="btn btn-primary">Update</a>
       <h1>Your resume</h1>
 
       <table class="table">
@@ -70,14 +72,14 @@
               <td>{{ job.jobPosition.name }}</td>
               <td>
                 <ul style="margin-left: 0px;">
-                  {% for ca in resume.categories %}
+                  {% for ca in job.categories %}
                     <li>{{ ca.name }}</li>
                   {% endfor %}
                 </ul>
               </td>
               <td>
                 <ul style="margin-left: 0px;">
-                  {% for la in resume.languages %}
+                  {% for la in job.languages %}
                     <li>{{ la.name }}</li>
                   {% endfor %}
                 </ul>

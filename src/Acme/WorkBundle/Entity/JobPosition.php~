@@ -150,4 +150,27 @@ class JobPosition
     {
         return $this->resume;
     }
+
+    /**
+     * Set group
+     *
+     * @param integer $group
+     * @return JobPosition
+     */
+    public function setGroup($group)
+    {
+        $this->group = $group;
+    
+        return $this;
+    }
+
+    /**
+     * Get group
+     *
+     * @return integer 
+     */
+    public function getGroup()
+    {
+        return $this->group;
+    }
 }

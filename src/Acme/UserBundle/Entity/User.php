@@ -29,6 +29,11 @@ class User extends BaseUser
     */
     protected $resumes;
 
+    /**
+    * @ORM\Column(type="boolean")
+    */
+    protected $isEmployer = false;
+
     public function __construct()
     {
         parent::__construct();
@@ -110,5 +115,51 @@ class User extends BaseUser
     public function getResumes()
     {
         return $this->resumes;
+    }
+
+    /**
+     * Set employer
+     *
+     * @param boolean $employer
+     * @return User
+     */
+    public function setEmployer($employer)
+    {
+        $this->employer = $employer;
+    
+        return $this;
+    }
+
+    /**
+     * Get employer
+     *
+     * @return boolean 
+     */
+    public function getEmployer()
+    {
+        return $this->employer;
+    }
+
+    /**
+     * Set isEmployer
+     *
+     * @param boolean $isEmployer
+     * @return User
+     */
+    public function setIsEmployer($isEmployer)
+    {
+        $this->isEmployer = $isEmployer;
+    
+        return $this;
+    }
+
+    /**
+     * Get isEmployer
+     *
+     * @return boolean 
+     */
+    public function getIsEmployer()
+    {
+        return $this->isEmployer;
     }
 }

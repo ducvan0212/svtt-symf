@@ -10,6 +10,7 @@
 {% endblock %}
 
 {% block body %}
+  <a href="{{ path('work_updateJob', { 'id': job.id }) }}" class="btn btn-primary">Update this job</a>
   <h1>{{ job.title }}</h1>
   
   <div class="job-feature">
@@ -123,15 +124,3 @@
     </div>
   </div>
 {% endblock %}
-
-
-
-
-
-
-
-
-
-
-
-
