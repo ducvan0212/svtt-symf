@@ -39,6 +39,13 @@ class JobPosition
     private $resume;
 
     /**
+     * @var integer
+     *
+     * @ORM\Column(name="group", type="integer")
+     */
+    private $group;
+
+    /**
      * Get id
      *
      * @return integer 
@@ -142,5 +149,28 @@ class JobPosition
     public function getResume()
     {
         return $this->resume;
+    }
+
+    /**
+     * Set group
+     *
+     * @param integer $group
+     * @return JobPosition
+     */
+    public function setGroup($group)
+    {
+        $this->group = $group;
+    
+        return $this;
+    }
+
+    /**
+     * Get group
+     *
+     * @return integer 
+     */
+    public function getGroup()
+    {
+        return $this->group;
     }
 }

@@ -67,7 +67,7 @@ class ResumeController extends Controller
           $em = $this->getDoctrine()->getManager();
           $em->persist($resume);
           $em->flush();
-          return new Response('okok'); 
+          return $this->redirect($this->generateUrl('work_showResume', array('id' => $resume->getId()) ));
         } else {
           return $this->render('AcmeWorkBundle:Resume:new.html.twig', array(
             'form' => $form->createView(),
@@ -123,10 +123,10 @@ class ResumeController extends Controller
         if ($first === $second) {
           return 0;
         }
-        $i1 = $first->getID(); $i2 = $second->getID();
-        $i3 = $first->estimator($resume);
-        $i4 = $second->estimator($resume);
-        print("first: $i1, second: $i2<br>es first: $i3, es second: $i4<br>");
+        // $i1 = $first->getID(); $i2 = $second->getID();
+        // $i3 = $first->estimator($resume);
+        // $i4 = $second->estimator($resume);
+        // print("first: $i1, second: $i2<br>es first: $i3, es second: $i4<br>");
         
         return $first->estimator($resume) > $second->estimator($resume) ? -1 : 1;
       });
@@ -187,7 +187,7 @@ class ResumeController extends Controller
           $em = $this->getDoctrine()->getManager();
           $em->persist($resume);
           $em->flush();
-          return new Response('okok'); 
+          return $this->redirect($this->generateUrl('work_showResume', array('id' => $resume->getId()) ));
         } else {
           return $this->render('AcmeWorkBundle:Resume:edit.html.twig', array(
             'form' => $form->createView(),

@@ -1,6 +1,6 @@
 {% extends '::base.html.twig' %}
 
-{% block title %}Show a resume{% endblock %}
+{% block title %}Your resume{% endblock %}
 
 {% block stylesheets %}
   {{ parent() }}
@@ -10,15 +10,82 @@
 {% endblock %}
 
 {% block body %}
-  <h1>Your resume</h1>
-  resume {{ resume.id }}:
-      {{ resume.location.name }}
-      {{ resume.salary.level }}
-      <br>
+    <div>
+      <h1>Your resume</h1>
 
-  <h1>Recommend jobs</h1>
-    {% for job in jobs %}
-      <a href="{{ path('work_showJob', { 'id': job.id }) }}">job {{ job.id }}</a>
-      <br>
-    {% endfor %}
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Location</th>
+            <th>Salary</th>
+            <th>Job position</th>
+            <th>Job Categories</th>
+            <th>Prefered Language</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>{{ resume.location.name }}</td>
+            <td>{{ resume.salary.level }}</td>
+            <td>{{ resume.jobPosition.name }}</td>
+            <td>
+              <ul>
+                {% for ca in resume.categories %}
+                  <li>{{ ca.name }}</li>
+                {% endfor %}
+              </ul>
+            </td>
+            <td>
+              <ul>
+                {% for la in resume.languages %}
+                  <li>{{ la.name }}</li>
+                {% endfor %}
+              </ul>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div>
+      <h1>Recommended jobs</h1>
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th>Job Title</th>
+            <th>Job Salary</th>
+            <th>Job Position</th>
+            <th>Job Categories</th>
+            <th>Prefered Language</th>
+            <th>Company Address</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for job in jobs %}
+            <tr>
+              <td>
+                <a href="{{ path('work_showJob', { 'id': job.id }) }}">{{ job.title }}</a>
+              </td>
+              <td>{{ job.salary.level }}</td>
+              <td>{{ job.jobPosition.name }}</td>
+              <td>
+                <ul style="margin-left: 0px;">
+                  {% for ca in resume.categories %}
+                    <li>{{ ca.name }}</li>
+                  {% endfor %}
+                </ul>
+              </td>
+              <td>
+                <ul style="margin-left: 0px;">
+                  {% for la in resume.languages %}
+                    <li>{{ la.name }}</li>
+                  {% endfor %}
+                </ul>
+              </td>
+              <td>{{ job.address }}</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
 {% endblock %}

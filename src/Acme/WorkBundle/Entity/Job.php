@@ -526,7 +526,7 @@ class Job
     // trong so 1->5. Cang to cang quan trong
     public function estimateLanguages(\Acme\WorkBundle\Entity\Resume $resume) {
         $counter = 0;
-        $alpha = 4;
+        $alpha = 2;
         foreach ($resume->getLanguages() as $language) {
             if ($this->getLanguages()->contains($language)) {
                 $counter += $alpha;
@@ -548,7 +548,7 @@ class Job
 
     public function estimateSalary(\Acme\WorkBundle\Entity\Resume $resume) {
         $alpha = 5;
-        $beta = 2;
+        $beta = 4;
         if ($this->getSalary()->getId() == $resume->getSalary()->getId()) {
             return $alpha;
         } else if ($this->getSalary()->getId() - $resume->getSalary()->getId() == 1) {
@@ -558,8 +558,8 @@ class Job
     }
 
     public function estimateJobPosition(\Acme\WorkBundle\Entity\Resume $resume) {
-        $alpha = 2;
-        if ($this->getJobPosition()->getId() == $resume->getJobPosition()->getId()) {
+        $alpha = 5;
+        if ($this->getJobPosition()->getGroup() == $resume->getJobPosition()->getGroup()) {
             return $alpha;
         }
         return 0;

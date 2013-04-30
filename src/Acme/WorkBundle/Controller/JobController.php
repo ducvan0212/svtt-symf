@@ -80,7 +80,7 @@ class JobController extends Controller
           $em = $this->getDoctrine()->getManager();
           $em->persist($job);
           $em->flush();
-          return new Response('okok'); 
+          return $this->redirect($this->generateUrl('work_showJob', array('id' => $job->getId()) ));
         } else {
           return $this->render('AcmeWorkBundle:Job:new.html.twig', array(
             'form' => $form->createView(),
@@ -190,7 +190,7 @@ class JobController extends Controller
           $em = $this->getDoctrine()->getManager();
           $em->persist($job);
           $em->flush();
-          return new Response('okok'); 
+          return $this->redirect($this->generateUrl('work_showJob', array('id' => $job->getId()) ));
         } else {
           return $this->render('AcmeWorkBundle:Job:edit.html.twig', array(
             'form' => $form->createView(),

@@ -39,6 +39,13 @@ class JobPosition
     private $resume;
 
     /**
+     * @var integer
+     *
+     * @ORM\Column(name="group", type="integer")
+     */
+    private $group;
+
+    /**
      * Get id
      *
      * @return integer 

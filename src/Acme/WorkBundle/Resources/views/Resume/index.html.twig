@@ -11,10 +11,40 @@
 
 {% block body %}
   <h1>Your resumes</h1>
-  {% for resume in resumes %}
-    <a href="{{ path('work_showResume', { 'id': resume.id }) }}">resume {{ resume.id }}</a>
-      {{ resume.location.name }}
-      {{ resume.salary.level }}
-      <br>
-  {% endfor %}
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Location</th>
+          <th>Salary</th>
+          <th>Job position</th>
+          <th>Job Categories</th>
+          <th>Prefered Language</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for key,resume in resumes %}
+        <tr>
+          <td><a href="{{ path('work_showResume', { 'id': resume.id }) }}">{{ key+1 }}</a></td>
+          <td>{{ resume.location.name }}</td>
+          <td>{{ resume.salary.level }}</td>
+          <td>{{ resume.jobPosition.name }}</td>
+          <td>
+            <ul>
+              {% for ca in resume.categories %}
+                <li>{{ ca.name }}</li>
+              {% endfor %}
+            </ul>
+          </td>
+          <td>
+            <ul>
+              {% for la in resume.languages %}
+                <li>{{ la.name }}</li>
+              {% endfor %}
+            </ul>
+          </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
 {% endblock %}
