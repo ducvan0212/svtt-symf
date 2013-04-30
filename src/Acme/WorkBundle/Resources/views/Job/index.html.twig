@@ -1,6 +1,6 @@
 {% extends '::base.html.twig' %}
 
-{% block title %}Create a resume{% endblock %}
+{% block title %}Your published jobs{% endblock %}
 
 {% block stylesheets %}
   {{ parent() }}
@@ -10,7 +10,7 @@
 {% endblock %}
 
 {% block body %}
-  <h1>Your jobs</h1>
+  <h1>Your published jobs</h1>
   {% for job in jobs %}
     <a href="{{ path('work_showJob', { 'id': job.id }) }}">job {{ job.id }}</a>
     <br>

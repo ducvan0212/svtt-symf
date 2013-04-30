@@ -5,6 +5,8 @@ namespace Acme\WorkBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Validator\Constraints\Count;
+use Symfony\Component\Validator\Constraints\Range;
+
 
 /**
  * Job
@@ -109,6 +111,18 @@ class Job
     * @ORM\JoinColumn(name="location_id", referencedColumnName="id")
     */
     protected $location;
+
+    /**
+     * @ORM\Column(name="neededNumber", type="integer")
+     * @Range(min = 1, max = 1000, minMessage = "Minimum is 1", maxMessage = "Maximum is 1000")
+     */
+    private $neededNumber;
+
+    /**
+     * @ORM\Column(name="recruitedNumber", type="integer")
+     * @Range(min = 0, max = 1000, minMessage = "Minimum is 0", maxMessage = "Maximum is 1000")
+     */
+    private $recruitedNumber;
 
     public function __construct() {
         $this->languages = new \Doctrine\Common\Collections\ArrayCollection();
@@ -444,19 +458,69 @@ class Job
         return $this->location;
     }
 
+    /**
+     * Set neededNumber
+     *
+     * @param integer $neededNumber
+     * @return Job
+     */
+    public function setNeededNumber($neededNumber)
+    {
+        $this->neededNumber = $neededNumber;
+    
+        return $this;
+    }
+
+    /**
+     * Get neededNumber
+     *
+     * @return integer 
+     */
+    public function getNeededNumber()
+    {
+        return $this->neededNumber;
+    }
+
+    /**
+     * Set recruitedNumber
+     *
+     * @param integer $recruitedNumber
+     * @return Job
+     */
+    public function setRecruitedNumber($recruitedNumber)
+    {
+        $this->recruitedNumber = $recruitedNumber;
+    
+        return $this;
+    }
+
+    /**
+     * Get recruitedNumber
+     *
+     * @return integer 
+     */
+    public function getRecruitedNumber()
+    {
+        return $this->recruitedNumber;
+    }
+
+    
     public function estimator(\Acme\WorkBundle\Entity\Resume $resume) {
-        $eLanguage = $this->estimateLanguages($resume);
-        $eCategory = $this->estimateCategories($resume);
-        $eSalary = $this->estimateSalary($resume);
-        $eJobPosition = $this->estimateJobPosition($resume);
-        $jobid = $this->getID();
-        $e = $eLanguage + $eCategory + $eSalary + $eJobPosition;
-        // print("job: $jobid | eLanguage: $eLanguage<br>");
-        // print("job: $jobid | eCategory: $eCategory<br>");
-        // print("job: $jobid | eSalary: $eSalary<br>");
-        // print("job: $jobid | eJobPosition: $eJobPosition<br>");
-        // print("job: $jobid | e: $e<br>");
-        return $e;
+        if ( $this->neededNumber - $this->recruitedNumber > 0 ) {
+            $eLanguage = $this->estimateLanguages($resume);
+            $eCategory = $this->estimateCategories($resume);
+            $eSalary = $this->estimateSalary($resume);
+            $eJobPosition = $this->estimateJobPosition($resume);
+            $jobid = $this->getID();
+            $e = $eLanguage + $eCategory + $eSalary + $eJobPosition;
+            // print("job: $jobid | eLanguage: $eLanguage<br>");
+            // print("job: $jobid | eCategory: $eCategory<br>");
+            // print("job: $jobid | eSalary: $eSalary<br>");
+            // print("job: $jobid | eJobPosition: $eJobPosition<br>");
+            // print("job: $jobid | e: $e<br>");
+            return $e;
+        }
+        return 0;
     }
 
     // trong so 1->5. Cang to cang quan trong
@@ -465,7 +529,7 @@ class Job
         $alpha = 4;
         foreach ($resume->getLanguages() as $language) {
             if ($this->getLanguages()->contains($language)) {
-                $counter++;
+                $counter += $alpha;
             }
         }
         return $counter;
@@ -476,27 +540,28 @@ class Job
         $alpha = 2;
         foreach ($resume->getCategories() as $category) {
             if ($this->getCategories()->contains($category)) {
-                $counter++;
+                $counter += $alpha;
             }
         }
         return $counter;
     }
 
     public function estimateSalary(\Acme\WorkBundle\Entity\Resume $resume) {
-        $counter = 0;
         $alpha = 5;
+        $beta = 2;
         if ($this->getSalary()->getId() == $resume->getSalary()->getId()) {
-            return 1;
+            return $alpha;
+        } else if ($this->getSalary()->getId() - $resume->getSalary()->getId() == 1) {
+            return $beta;
         }
-        return $counter;
+        return 0;
     }
 
     public function estimateJobPosition(\Acme\WorkBundle\Entity\Resume $resume) {
-        $counter = 0;
         $alpha = 2;
         if ($this->getJobPosition()->getId() == $resume->getJobPosition()->getId()) {
-            return 1;
+            return $alpha;
         }
-        return $counter;
+        return 0;
     }
 }

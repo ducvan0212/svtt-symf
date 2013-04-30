@@ -1,6 +1,6 @@
 {% extends '::base.html.twig' %}
 
-{% block title %}Show a job{% endblock %}
+{% block title %}{{ job.title }}{% endblock %}
 
 {% block stylesheets %}
   {{ parent() }}
@@ -10,29 +10,128 @@
 {% endblock %}
 
 {% block body %}
-  <h1>Your job</h1>
-  job {{ job.id }}:<br>
-      title: {{ job.title }}<br>
-      contact: {{ job.contact }}<br>
-      required application: {{ job.requiredApplication }}<br>
-      address: {{ job.address }}<br>
-      languages:
-        <ul> 
-        {% for la in job.languages %}
-          <li>{{ la.name }}</li>
-        {% endfor %}
-        </ul>
-      categories:
-        <ul> 
-        {% for ca in job.categories %}
-          <li>{{ ca.name }}</li>
-        {% endfor %}
-        </ul>
+  <h1>{{ job.title }}</h1>
+  
+  <div class="job-feature">
+    <div class="job-feature-label">Contact Infomation</div>
+    <div class="job-feature-detail">
+      {{ job.contact }}
+    </div>
+  </div>
+
+  <div class="controls controls-row">
+    <div class="job-feature span8">
+      <div class="job-feature-label">Company Address</div>
+      <div class="job-feature-detail">
+        {{ job.address}}
+      </div>
+    </div>
+
+    <div class="job-feature for-fit">
+      <div class="job-feature-label">Location</div>
+      <div class="job-feature-detail">
+        {{ job.location.name }}
+      </div>
+    </div>
+  </div>
+
+  <div class="job-feature">
+  <div class="job-feature-label">Job Description</div>
+    <div class="job-feature-detail">
+      <div class="job-feature-label">
+        Job Category
+      </div>
+      <ul> 
+      {% for ca in job.categories %}
+        <li>{{ ca.name }}</li>
+      {% endfor %}
+      </ul>
+    </div>
+    
+    <div class="job-feature-detail">
+      <div class="subfeature-label">
+        Job Position
+      </div>
+      {{ job.jobPosition.name }}      
+    </div>
+
+    <div class="controls controls-row">
+      <div class="job-feature-detail needed-number">
+        <div class="subfeature-label">
+          Needed Number
+        </div>
+        {{ job.neededNumber }}
+      </div>
+      <div class="job-feature-detail recruited-number">
+        <div class="subfeature-label">
+          Recruited Number
+        </div>
+        {{ job.recruitedNumber }}
+      </div>
+    </div>
+
+    <div class="job-feature-detail">
+      <div class="subfeature-label">
+        Other Job Description
+      </div>
+      {{ job.otherDescription }}
+    </div>
+  </div>
+
+  <div class="job-feature">
+    <div class="job-feature-label">Job Benefit</div>
+    <div class="job-feature-detail">
+      <div class="subfeature-label">
+        Salary
+      </div>
+      {{ job.salary.level }}
+    </div>
+    <div class="job-feature-detail">
+      <div class="subfeature-label">
+        Other Benefit
+      </div>
+      {{ job.otherBenefit }}
+    </div>
+  </div>
       
-      salary: {{ job.salary.level }}<br>
-      job position: {{ job.jobPosition.name }}<br>
-      other benefit: {{ job.otherBenefit }}<br>
-      job requirement: {{ job.jobRequirement }}<br>
-      other description: {{ job.otherDescription }}<br>
-      location: {{ job.location.name }}<br>
+  <div class="job-feature">
+    <div class="job-feature-label">Job Requirement</div>
+    <div class="job-feature-detail">
+      <div class="subfeature-label">
+        Prefered Languages
+      </div>
+      <ul> 
+      {% for la in job.languages %}
+        <li>{{ la.name }}</li>
+      {% endfor %}
+      </ul>
+    </div>
+    <div class="job-feature-detail">
+      <div class="subfeature-label">
+        Other Requirement
+      </div>
+      {{ job.jobRequirement }}
+    </div>
+  </div>
+
+  <div class="job-feature">
+    <div class="job-feature-label">
+      Required Application
+    </div>
+    <div class="job-feature-detail">
+      {{ job.requiredApplication }}
+    </div>
+  </div>
 {% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+

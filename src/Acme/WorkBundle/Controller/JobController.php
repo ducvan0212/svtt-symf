@@ -65,6 +65,8 @@ class JobController extends Controller
         'expanded' => false,
         'multiple' => false))
         ->add('otherDescription', 'textarea')
+        ->add('neededNumber', 'text')
+        ->add('recruitedNumber', 'text')
 	  	  ->getForm();
 
       if ($request->isMethod('POST')) {
@@ -138,6 +140,10 @@ class JobController extends Controller
         );
       }
 
+      if ($job->getUser()->getId() != $this->getUser()->getId()) {
+        throw new AccessDeniedException();
+      }
+
       $request = $this->get('request');
 
       $form = $this->createFormBuilder($job)
@@ -173,6 +179,8 @@ class JobController extends Controller
         'expanded' => false,
         'multiple' => false))
         ->add('otherDescription', 'textarea')
+        ->add('neededNumber', 'text')
+        ->add('recruitedNumber', 'text')
         ->getForm();
 
       if ($request->isMethod('POST')) {

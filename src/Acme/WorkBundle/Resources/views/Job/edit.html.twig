@@ -90,6 +90,20 @@
     {{ form_label(form.jobPosition, 'Job Position', { 'label_attr': {'class': 'subfeature-label'} }) }}
     {{ form_widget(form.jobPosition) }}
   </div>
+  
+  <div class="controls controls-row">
+    <div class="job-feature-detail needed-number">
+      {{ form_label(form.neededNumber, 'Needed Number', { 'label_attr': {'class': 'subfeature-label'} }) }}
+      {{ form_errors(form.neededNumber) }}
+      {{ form_widget(form.neededNumber) }}
+    </div>
+    <div class="job-feature-detail recruited-number">
+      {{ form_label(form.recruitedNumber, 'Recruited Number', { 'label_attr': {'class': 'subfeature-label'} }) }}
+      {{ form_errors(form.recruitedNumber) }}
+      {{ form_widget(form.recruitedNumber) }}
+    </div>
+  </div>
+
   <div class="job-feature-detail">
     {{ form_label(form.otherDescription, 'Other Job Description', { 'label_attr': {'class': 'subfeature-label'} }) }}
     {{ form_widget(form.otherDescription) }}

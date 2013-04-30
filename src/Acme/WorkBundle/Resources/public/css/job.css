@@ -82,3 +82,29 @@ select {
 .controls .for-fit .job-feature-detail select {
   width: 230px;
 }
+
+.needed-number {
+  width: 300px;
+  float: left;
+}
+
+.needed-number .alert {
+  width: 248px;
+}
+
+.needed-number #form_neededNumber {
+  width: 285px;
+}
+
+.recruited-number {
+  width: 300px;
+  float: left;
+}
+
+.recruited-number .alert {
+  width: 248px;
+}
+
+.recruited-number #form_recruitedNumber {
+  width: 285px;
+}

@@ -51,7 +51,7 @@ class Resume
     /**
     * @ORM\ManyToMany(targetEntity="Category", inversedBy="resumes")
     * @ORM\JoinTable(name="resumes_categories")
-    * @Count(min = 1, minMessage = "At least one category must be selected")
+    * @Count(min = 1, max = 4, minMessage = "At least one category must be selected", maxMessage = " |You cannot specify more than 5 categories")
     **/
     private $categories;
 
@@ -212,5 +212,28 @@ class Resume
     public function getJobPosition()
     {
         return $this->jobPosition;
+    }
+
+    /**
+     * Set user
+     *
+     * @param \Acme\UserBundle\Entity\User $user
+     * @return Resume
+     */
+    public function setUser(\Acme\UserBundle\Entity\User $user = null)
+    {
+        $this->user = $user;
+    
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return \Acme\UserBundle\Entity\User 
+     */
+    public function getUser()
+    {
+        return $this->user;
     }
 }

@@ -1,6 +1,6 @@
 {% extends '::base.html.twig' %}
 
-{% block title %}Public a job{% endblock %}
+{% block title %}Publish a job{% endblock %}
 
 {% block stylesheets %}
   {{ parent() }}
@@ -41,7 +41,7 @@
 {% endblock %}
 
 {% block body %}
-<h1>Public a job</h1>
+<h1>Publish a job</h1>
 <form action="{{ path('work_createJob') }}" method="post" {{ form_enctype(form) }}>
 {{ form_errors(form) }}
 
@@ -90,6 +90,20 @@
     {{ form_label(form.jobPosition, 'Job Position', { 'label_attr': {'class': 'subfeature-label'} }) }}
     {{ form_widget(form.jobPosition) }}
   </div>
+
+  <div class="controls controls-row">
+    <div class="job-feature-detail needed-number">
+      {{ form_label(form.neededNumber, 'Needed Number', { 'label_attr': {'class': 'subfeature-label'} }) }}
+      {{ form_errors(form.neededNumber) }}
+      {{ form_widget(form.neededNumber) }}
+    </div>
+    <div class="job-feature-detail recruited-number">
+      {{ form_label(form.recruitedNumber, 'Recruited Number', { 'label_attr': {'class': 'subfeature-label'} }) }}
+      {{ form_errors(form.recruitedNumber) }}
+      {{ form_widget(form.recruitedNumber) }}
+    </div>
+  </div>
+
   <div class="job-feature-detail">
     {{ form_label(form.otherDescription, 'Other Job Description', { 'label_attr': {'class': 'subfeature-label'} }) }}
     {{ form_widget(form.otherDescription) }}

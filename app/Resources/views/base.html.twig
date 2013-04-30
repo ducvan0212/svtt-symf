@@ -34,6 +34,7 @@
             </div>
         </header>
 
+
         <div class="container" style="margin-top: 50px;">
             {% for key, message in app.session.getFlashes() %}
             <div class="{{ key }} text-warning">
@@ -41,7 +42,8 @@
             </div>
             {% endfor %}
         
-        {% block body %}{% endblock %}
+        {% block body %}
+        {% endblock %}
 
         <!-- {% block javascripts %}
           <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
@@ -51,5 +53,8 @@
         {% endblock %}
     	 -->
         </div>
+        <footer class="footer">
+            Powered by Nguyen Duc Van, 2013            
+        </footer>
     </body>
 </html>
