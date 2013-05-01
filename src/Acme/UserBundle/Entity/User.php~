@@ -139,4 +139,27 @@ class User extends BaseUser
     {
         return $this->employer;
     }
+
+    /**
+     * Set isEmployer
+     *
+     * @param boolean $isEmployer
+     * @return User
+     */
+    public function setIsEmployer($isEmployer)
+    {
+        $this->isEmployer = $isEmployer;
+    
+        return $this;
+    }
+
+    /**
+     * Get isEmployer
+     *
+     * @return boolean 
+     */
+    public function getIsEmployer()
+    {
+        return $this->isEmployer;
+    }
 }

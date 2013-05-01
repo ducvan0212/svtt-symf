@@ -108,3 +108,7 @@ select {
 .recruited-number #form_recruitedNumber {
   width: 285px;
 }
+
+.date-feature .alert {
+  width: 200px; 
+}

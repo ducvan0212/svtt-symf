@@ -124,6 +124,11 @@ class Job
      */
     private $recruitedNumber;
 
+    /**
+     * @ORM\Column(name="expiredDate", type="date")
+     */
+    private $expiredDate;
+
     public function __construct() {
         $this->languages = new \Doctrine\Common\Collections\ArrayCollection();
         $this->categories = new \Doctrine\Common\Collections\ArrayCollection();

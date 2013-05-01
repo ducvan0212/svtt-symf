@@ -12,3 +12,5 @@ Acme\WorkBundle\Entity\Job:
       - NotBlank: ~
     otherDescription:
       - NotBlank: ~
+    expiredDate:
+      - NotBlank: ~

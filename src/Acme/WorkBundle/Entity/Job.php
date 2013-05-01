@@ -124,6 +124,11 @@ class Job
      */
     private $recruitedNumber;
 
+    /**
+     * @ORM\Column(name="expiredDate", type="date")
+     */
+    private $expiredDate;
+
     public function __construct() {
         $this->languages = new \Doctrine\Common\Collections\ArrayCollection();
         $this->categories = new \Doctrine\Common\Collections\ArrayCollection();
@@ -563,5 +568,28 @@ class Job
             return $alpha;
         }
         return 0;
+    }
+
+    /**
+     * Set expiredDate
+     *
+     * @param \DateTime $expiredDate
+     * @return Job
+     */
+    public function setExpiredDate($expiredDate)
+    {
+        $this->expiredDate = $expiredDate;
+    
+        return $this;
+    }
+
+    /**
+     * Get expiredDate
+     *
+     * @return \DateTime 
+     */
+    public function getExpiredDate()
+    {
+        return $this->expiredDate;
     }
 }

@@ -72,6 +72,10 @@ class JobController extends Controller
         ->add('otherDescription', 'textarea')
         ->add('neededNumber', 'text')
         ->add('recruitedNumber', 'text')
+        ->add('expiredDate', 'date', array(
+        'input'  => 'datetime',
+        'widget' => 'single_text',
+        'format' => 'yyyy-MM-dd',))
 	  	  ->getForm();
 
       if ($request->isMethod('POST')) {
@@ -185,6 +189,10 @@ class JobController extends Controller
         ->add('otherDescription', 'textarea')
         ->add('neededNumber', 'text')
         ->add('recruitedNumber', 'text')
+        ->add('expiredDate', 'date', array(
+        'input'  => 'datetime',
+        'widget' => 'single_text',
+        'format' => 'yyyy-MM-dd',))
         ->getForm();
 
       if ($request->isMethod('POST')) {

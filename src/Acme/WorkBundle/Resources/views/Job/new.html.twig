@@ -40,18 +40,37 @@
 {% endspaceless %}
 {% endblock %}
 
+{% block date_widget %}
+{% spaceless %}
+<div {{ block('widget_container_attributes') }}>
+  <input type="date" name="form[expiredDate]">
+</div>
+{% endspaceless %}
+{% endblock %}
+
 {% block body %}
 <h1>Publish a job</h1>
 <form action="{{ path('work_createJob') }}" method="post" {{ form_enctype(form) }}>
 {{ form_errors(form) }}
 
-<div class="job-feature">
-  {{ form_label(form.title, 'Title', { 'label_attr': {'class': 'job-feature-label'} }) }}
-  <div class="job-feature-detail">
-    {{ form_errors(form.title) }}
-    {{ form_widget(form.title) }}
+<div class="controls controls-row">
+  <div class="job-feature span8">
+    {{ form_label(form.title, 'Title', { 'label_attr': {'class': 'job-feature-label'} }) }}
+    <div class="job-feature-detail">
+      {{ form_errors(form.title) }}
+      {{ form_widget(form.title) }}
+    </div>
+  </div>
+
+  <div class="job-feature for-fit date-feature">
+    {{ form_label(form.expiredDate, 'Expired Date', { 'label_attr': {'class': 'job-feature-label'} }) }}
+    <div class="job-feature-detail">
+      {{ form_errors(form.expiredDate) }}
+      {{ form_widget(form.expiredDate) }}
+    </div>
   </div>
 </div>
+
 
 <div class="job-feature">
   {{ form_label(form.contact, 'Employer Contact (phone number, email, etc)', { 'label_attr': {'class': 'job-feature-label'} }) }}

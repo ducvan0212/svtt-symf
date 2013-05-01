@@ -45,11 +45,21 @@
 <form action="{{ path('work_updateJob', { 'id': job.id }) }}" method="post" {{ form_enctype(form) }}>
 {{ form_errors(form) }}
 
-<div class="job-feature">
-  {{ form_label(form.title, 'Title', { 'label_attr': {'class': 'job-feature-label'} }) }}
-  <div class="job-feature-detail">
-    {{ form_errors(form.title) }}
-    {{ form_widget(form.title) }}
+<div class="controls controls-row">
+  <div class="job-feature span8">
+    {{ form_label(form.title, 'Title', { 'label_attr': {'class': 'job-feature-label'} }) }}
+    <div class="job-feature-detail">
+      {{ form_errors(form.title) }}
+      {{ form_widget(form.title) }}
+    </div>
+  </div>
+
+  <div class="job-feature for-fit">
+    {{ form_label(form.expiredDate, 'Expired Date', { 'label_attr': {'class': 'job-feature-label'} }) }}
+    <div class="job-feature-detail">
+      {{ form_errors(form.expiredDate) }}
+      {{ form_widget(form.expiredDate) }}
+    </div>
   </div>
 </div>
 

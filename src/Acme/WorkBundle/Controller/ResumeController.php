@@ -107,11 +107,19 @@ class ResumeController extends Controller
           'No resume found'
         );
       }
-      $relatedJobs = $this->getDoctrine()
-          ->getRepository('AcmeWorkBundle:Job')
-          ->findBy(
-            array('location' => $resume->getLocation())
-          );
+      $qb = $this->getDoctrine()->getRepository('AcmeWorkBundle:Job')->createQueryBuilder('j')
+      ->where('j.location = :location AND j.expiredDate > :current_date')
+      ->setParameter('location', $resume->getLocation())
+      ->setParameter('current_date', new \Datetime('now'));
+
+      $relatedJobs = $qb->getQuery()->getResult();
+      // $relatedJobs = $this->getDoctrine()
+      //     ->getRepository('AcmeWorkBundle:Job')
+      //     ->findBy(
+      //       array('location' => $resume->getLocation())
+      //       array('date' => $resume->getLocation())
+      //     );
+
       // convert array of Job to collection array of job
       $convertedJobs = new \Doctrine\Common\Collections\ArrayCollection($relatedJobs);
       // get iterator

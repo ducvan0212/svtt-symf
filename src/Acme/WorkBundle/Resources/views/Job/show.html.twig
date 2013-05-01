@@ -12,30 +12,16 @@
 {% block body %}
   <a href="{{ path('work_updateJob', { 'id': job.id }) }}" class="btn btn-primary">Update this job</a>
   <h1>{{ job.title }}</h1>
-  
+
   <div class="job-feature">
-    <div class="job-feature-label">Contact Infomation</div>
+    <div class="job-feature-label">
+      Expired Date (day-month-year)
+    </div>
     <div class="job-feature-detail">
-      {{ job.contact }}
+      {{ job.expiredDate|date('d-m-Y') }}      
     </div>
   </div>
-
-  <div class="controls controls-row">
-    <div class="job-feature span8">
-      <div class="job-feature-label">Company Address</div>
-      <div class="job-feature-detail">
-        {{ job.address}}
-      </div>
-    </div>
-
-    <div class="job-feature for-fit">
-      <div class="job-feature-label">Location</div>
-      <div class="job-feature-detail">
-        {{ job.location.name }}
-      </div>
-    </div>
-  </div>
-
+    
   <div class="job-feature">
   <div class="job-feature-label">Job Description</div>
     <div class="job-feature-detail">
@@ -121,6 +107,29 @@
     </div>
     <div class="job-feature-detail">
       {{ job.requiredApplication }}
+    </div>
+  </div>
+
+  <div class="job-feature">
+    <div class="job-feature-label">Contact Infomation</div>
+    <div class="job-feature-detail">
+      {{ job.contact }}
+    </div>
+  </div>
+
+  <div class="controls controls-row">
+    <div class="job-feature span8">
+      <div class="job-feature-label">Company Address</div>
+      <div class="job-feature-detail">
+        {{ job.address}}
+      </div>
+    </div>
+
+    <div class="job-feature for-fit">
+      <div class="job-feature-label">Location</div>
+      <div class="job-feature-detail">
+        {{ job.location.name }}
+      </div>
     </div>
   </div>
 {% endblock %}
