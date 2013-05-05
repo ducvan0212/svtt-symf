@@ -1,6 +1,6 @@
 {% extends '::base.html.twig' %}
 
-{% block title %}Edit a resume{% endblock %}
+{% block title %}Edit a filter{% endblock %}
 
 {% block stylesheets %}
   {{ parent() }}
@@ -41,7 +41,7 @@
 {% endblock %}
 
 {% block body %}
-<h1>Edit a resume</h1>
+<h1>Edit a filter</h1>
 <form action="{{ path('work_updateResume', { 'id': resume.id }) }}" method="post" {{ form_enctype(form) }}>
 {{ form_errors(form) }}
 

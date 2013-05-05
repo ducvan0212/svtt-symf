@@ -138,10 +138,18 @@ class ResumeController extends Controller
         
         return $first->estimator($resume) > $second->estimator($resume) ? -1 : 1;
       });
+      
+      $orderedJobsInArray =  iterator_to_array($orderedJobs);
+      $paginator  = $this->get('knp_paginator');
+      $pagination = $paginator->paginate(
+        $orderedJobsInArray,
+        $this->get('request')->query->get('page', 1)/*page number*/,
+        5/*limit per page*/
+        );
 
       return $this->render('AcmeWorkBundle:Resume:show.html.twig', array(
             'resume' => $resume,
-            'jobs' => $orderedJobs,
+            'pagination' => $pagination,
             ));
     }
 

@@ -16,14 +16,14 @@ work_updateJob:
   defaults: { _controller: AcmeWorkBundle:Job:update }
 
 work_createResume:
-  path: /resume/create
+  path: /filter/create
   defaults: { _controller: AcmeWorkBundle:Resume:create }
 work_indexResume:
-  path: /resume/index
+  path: /filter/index
   defaults: { _controller: AcmeWorkBundle:Resume:index }
 work_showResume:
-  path: /resume/show/{id}
+  path: /filter/show/{id}
   defaults: { _controller: AcmeWorkBundle:Resume:show }
 work_updateResume:
-  path: /resume/update/{id}
+  path: /filter/update/{id}
   defaults: { _controller: AcmeWorkBundle:Resume:update }

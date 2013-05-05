@@ -21,6 +21,7 @@
         <th>Prefered Language</th>
         <th>Needed</th>
         <th>Recruited</th>
+        <th>Expired Date</th>
         <th></th>
       </tr>
     </thead>
@@ -51,6 +52,9 @@
         </td>
         <td>
           {{ job.recruitedNumber }}
+        </td>
+        <td>
+          {{ job.expiredDate|date("d/m/Y") }}
         </td>
         <td>
           <a href="{{ path('work_updateJob', { 'id': job.id }) }}">update</a>
