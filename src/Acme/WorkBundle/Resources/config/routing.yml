@@ -37,3 +37,6 @@ work_showResume:
 work_updateResume:
   path: /resume/update/{id}
   defaults: { _controller: AcmeWorkBundle:Resume:update }
+work_applyResume:
+  path: /resume/apply/{id}
+  defaults: { _controller: AcmeWorkBundle:Resume:apply }

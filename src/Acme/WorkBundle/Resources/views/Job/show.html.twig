@@ -134,4 +134,42 @@
       </div>
     </div>
   </div>
+
+    
+  {% if (app.user.isEmployer != true) %}
+    {% if job in app.user.resume.jobs %}
+      <div class="text-center" style="margin-top: 20px;">
+        {{ 'You applied your resume to this job' }}
+      </div>
+    {% else %}
+      <form action="{{ path('work_applyResume', { 'id': job.id }) }}" method="post" {{ form_enctype(form) }}>
+        {{ form_widget(form.jobs) }}
+        {{ form_rest(form) }}
+      <input type="submit" class="btn btn-primary btn-large offset5" style="margin-top: 20px;" value="Apply" />
+      </form>
+    {% endif %}
+  {% else %}
+    <h2 style="margin-top: 20px; margin-bottom: 10px; text-align: center;">Applied resume</h2>
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th>Resume id</th>
+          <th>Graduated Place</th>
+          <th>Faculty</th>
+          <th>Avarage Score</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for resume in job.resumes %}
+          <tr>
+            <td><a href="{{ path('work_showResume', { 'id': resume.id }) }}">{{ resume.id }}</a></td>
+            <td>{{ resume.graduatedPlace }}</td>
+            <td>{{ resume.falcuty }}</td>
+            <td>{{ resume.averageScore }}
+            </td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  {% endif %}
 {% endblock %}

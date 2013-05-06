@@ -129,9 +129,15 @@ class Job
      */
     private $expiredDate;
 
+    /**
+    * @ORM\ManyToMany(targetEntity="Acme\WorkBundle\Entity\Resume", mappedBy="jobs")
+    **/
+    private $resumes;
+
     public function __construct() {
         $this->languages = new \Doctrine\Common\Collections\ArrayCollection();
         $this->categories = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->resumes = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
@@ -591,5 +597,38 @@ class Job
     public function getExpiredDate()
     {
         return $this->expiredDate;
+    }
+
+    /**
+     * Add resumes
+     *
+     * @param \Acme\WorkBundle\Entity\Resume $resumes
+     * @return Job
+     */
+    public function addResume(\Acme\WorkBundle\Entity\Resume $resumes)
+    {
+        $this->resumes[] = $resumes;
+    
+        return $this;
+    }
+
+    /**
+     * Remove resumes
+     *
+     * @param \Acme\WorkBundle\Entity\Resume $resumes
+     */
+    public function removeResume(\Acme\WorkBundle\Entity\Resume $resumes)
+    {
+        $this->resumes->removeElement($resumes);
+    }
+
+    /**
+     * Get resumes
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getResumes()
+    {
+        return $this->resumes;
     }
 }

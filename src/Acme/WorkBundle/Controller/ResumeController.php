@@ -147,4 +147,28 @@ class ResumeController extends Controller
             ));
       }      
     }
+
+    public function applyAction($id)
+    {
+      if (false === $this->get('security.context')->isGranted('ROLE_USER')) {
+        throw new AccessDeniedException();
+      }
+
+      $em = $this->getDoctrine()->getManager();
+      $resume = $this->getUser()->getResume();
+      if (!$resume) {
+        throw $this->createNotFoundException( 
+          'No resume found'
+        );
+      }
+      $request = $this->get('request');
+      $job = $em->getRepository('AcmeWorkBundle:Job')->find($id);
+      $resume->addJob($job);
+
+      $em = $this->getDoctrine()->getManager();
+      $em->persist($resume);
+      $em->flush();
+      
+      return $this->redirect($this->generateUrl('work_showJob', array('id' => $job->getId()) ));
+    }
 }

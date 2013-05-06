@@ -84,6 +84,12 @@ class Resume
     private $languages;
 
     /**
+    * @ORM\ManyToMany(targetEntity="Job", inversedBy="resumes")
+    * @ORM\JoinTable(name="resumes_jobs")
+    **/
+    private $jobs;
+
+    /**
      * Get id
      *
      * @return integer 
@@ -99,6 +105,7 @@ class Resume
     public function __construct()
     {
         $this->languages = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->jobs = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
 
@@ -317,5 +324,38 @@ class Resume
     public function getRealName()
     {
         return $this->realName;
+    }
+
+    /**
+     * Add jobs
+     *
+     * @param \Acme\WorkBundle\Entity\Job $jobs
+     * @return Resume
+     */
+    public function addJob(\Acme\WorkBundle\Entity\Job $jobs)
+    {
+        $this->jobs[] = $jobs;
+    
+        return $this;
+    }
+
+    /**
+     * Remove jobs
+     *
+     * @param \Acme\WorkBundle\Entity\Job $jobs
+     */
+    public function removeJob(\Acme\WorkBundle\Entity\Job $jobs)
+    {
+        $this->jobs->removeElement($jobs);
+    }
+
+    /**
+     * Get jobs
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getJobs()
+    {
+        return $this->jobs;
     }
 }

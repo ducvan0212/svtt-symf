@@ -129,9 +129,15 @@ class Job
      */
     private $expiredDate;
 
+    /**
+    * @ORM\ManyToMany(targetEntity="Acme\WorkBundle\Entity\Resume", mappedBy="jobs")
+    **/
+    private $resumes;
+
     public function __construct() {
         $this->languages = new \Doctrine\Common\Collections\ArrayCollection();
         $this->categories = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->resumes = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**

@@ -126,6 +126,8 @@ class JobController extends Controller
         throw new AccessDeniedException();
       }
 
+      $user = $this->getUser();
+      $resume = $user->getResume();
       $job = $this->getDoctrine()
             ->getRepository('AcmeWorkBundle:Job')
             ->find($id);
@@ -134,9 +136,15 @@ class JobController extends Controller
           'No job found'
         );
       }
-
+      $form = $this->createFormBuilder($resume)
+        ->add('jobs', 'hidden', array(
+            'data' => $job->getId()
+      ))->getForm()->createView();
+      
       return $this->render('AcmeWorkBundle:Job:show.html.twig', array(
             'job' => $job,
+            'resume' => $resume,
+            'form' => $form,
             ));
     }
 
