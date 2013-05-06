@@ -1,0 +1,95 @@
+{% extends '::base.html.twig' %}
+
+{% block title %}Your filter{% endblock %}
+
+{% block stylesheets %}
+  {{ parent() }}
+  {% stylesheets '@AcmeWorkBundle/Resources/public/css/*' filter='cssrewrite' %}
+    <link rel="stylesheet" href="{{ asset_url }}" />
+  {% endstylesheets %}
+{% endblock %}
+
+{% block body %}
+    <div>
+      <a href="{{ path('work_indexFilter') }}" class="btn btn-primary">{{ 'Back' }}</a>
+      <a href="{{ path('work_updateFilter', { 'id': filter.id }) }}" class="btn btn-primary">Update</a>
+      <h1>Your filter</h1>
+
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Location</th>
+            <th>Salary</th>
+            <th>Job position</th>
+            <th>Job Categories</th>
+            <th>Prefered Language</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>{{ filter.location.name }}</td>
+            <td>{{ filter.salary.level }}</td>
+            <td>{{ filter.jobPosition.name }}</td>
+            <td>
+              <ul>
+                {% for ca in filter.categories %}
+                  <li>{{ ca.name }}</li>
+                {% endfor %}
+              </ul>
+            </td>
+            <td>
+              <ul>
+                {% for la in filter.languages %}
+                  <li>{{ la.name }}</li>
+                {% endfor %}
+              </ul>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div>
+      <h1>Recommended jobs</h1>
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th>Job Title</th>
+            <th>Job Salary</th>
+            <th>Job Position</th>
+            <th>Job Categories</th>
+            <th>Prefered Language</th>
+            <th>Company Address</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for job in pagination %}
+            <tr>
+              <td>
+                <a href="{{ path('work_showJob', { 'id': job.id }) }}">{{ job.title }}</a>
+              </td>
+              <td>{{ job.salary.level }}</td>
+              <td>{{ job.jobPosition.name }}</td>
+              <td>
+                <ul>
+                  {% for ca in job.categories %}
+                    <li>{{ ca.name }}</li>
+                  {% endfor %}
+                </ul>
+              </td>
+              <td>
+                <ul>
+                  {% for la in job.languages %}
+                    <li>{{ la.name }}</li>
+                  {% endfor %}
+                </ul>
+              </td>
+              <td>{{ job.address }}</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+
+      {{ knp_pagination_render(pagination) }}
+    </div>
+{% endblock %}

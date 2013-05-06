@@ -1,5 +1,9 @@
 {% extends '::base.html.twig' %}
 
 {% block body %}
-  <div>abc</div>
+  <div style="text-align: center;">
+    {% image '../app/Resources/public/img/Online-Job-Search.jpg' %}
+      <img src="{{ asset_url }}" alt="An Image"/>
+    {% endimage %}
+  </div>
 {% endblock %}

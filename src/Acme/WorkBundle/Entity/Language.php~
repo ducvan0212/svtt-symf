@@ -33,11 +33,15 @@ class Language
     **/
     private $jobs;
 	
-
     /**
     * @ORM\ManyToMany(targetEntity="Acme\WorkBundle\Entity\Resume", mappedBy="languages")
     **/
     private $resumes;
+
+    /**
+    * @ORM\ManyToMany(targetEntity="Acme\WorkBundle\Entity\Filter", mappedBy="languages")
+    **/
+    private $filters;
 
 	public function __construct() {
         $this->jobs = new \Doctrine\Common\Collections\ArrayCollection();
@@ -107,6 +111,39 @@ class Language
     public function getJobs()
     {
         return $this->jobs;
+    }
+
+    /**
+     * Add filters
+     *
+     * @param \Acme\WorkBundle\Entity\Filter $filters
+     * @return Language
+     */
+    public function addFilter(\Acme\WorkBundle\Entity\Filter $filters)
+    {
+        $this->filters[] = $filters;
+    
+        return $this;
+    }
+
+    /**
+     * Remove filters
+     *
+     * @param \Acme\WorkBundle\Entity\Filter $filters
+     */
+    public function removeFilter(\Acme\WorkBundle\Entity\Filter $filters)
+    {
+        $this->filters->removeElement($filters);
+    }
+
+    /**
+     * Get filters
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getFilters()
+    {
+        return $this->filters;
     }
 
     /**

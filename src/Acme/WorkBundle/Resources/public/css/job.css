@@ -29,7 +29,9 @@ input[type="checkbox"] {
 
 .job-feature-detail {
   padding-left: 20px;
+  padding-right: 10px;
   margin-bottom: 10px;
+  word-wrap: break-word;
 }
 
 .subfeature-label {

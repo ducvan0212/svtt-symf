@@ -14,3 +14,17 @@ Acme\WorkBundle\Entity\Job:
       - NotBlank: ~
     expiredDate:
       - NotBlank: ~
+Acme\WorkBundle\Entity\Resume:
+  properties:
+    contact:
+      - NotBlank: ~
+    realName:
+      - NotBlank: ~
+    birthday:
+      - NotBlank: ~
+    graduatedPlace:
+      - NotBlank: ~
+    falcuty:
+      - NotBlank: ~
+    averageScore:
+      - NotBlank: ~

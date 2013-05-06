@@ -25,9 +25,14 @@ class User extends BaseUser
     protected $jobs;
 
     /**
-    * @ORM\OneToMany(targetEntity="Acme\WorkBundle\Entity\Resume", mappedBy="user")
+     * @ORM\OneToOne(targetEntity="Acme\WorkBundle\Entity\Resume", mappedBy="user")
+     */
+    protected $resume;
+
+    /**
+    * @ORM\OneToMany(targetEntity="Acme\WorkBundle\Entity\Filter", mappedBy="user")
     */
-    protected $resumes;
+    protected $filters;
 
     /**
     * @ORM\Column(type="boolean")
@@ -85,36 +90,36 @@ class User extends BaseUser
     }
 
     /**
-     * Add resumes
+     * Add filters
      *
-     * @param \Acme\WorkBundle\Entity\Resume $resumes
+     * @param \Acme\WorkBundle\Entity\Filter $filters
      * @return User
      */
-    public function addResume(\Acme\WorkBundle\Entity\Resume $resumes)
+    public function addFilter(\Acme\WorkBundle\Entity\Filter $filters)
     {
-        $this->resumes[] = $resumes;
+        $this->filters[] = $filters;
     
         return $this;
     }
 
     /**
-     * Remove resumes
+     * Remove filters
      *
-     * @param \Acme\WorkBundle\Entity\Resume $resumes
+     * @param \Acme\WorkBundle\Entity\Filter $filters
      */
-    public function removeResume(\Acme\WorkBundle\Entity\Resume $resumes)
+    public function removeFilter(\Acme\WorkBundle\Entity\Filter $filters)
     {
-        $this->resumes->removeElement($resumes);
+        $this->filters->removeElement($filters);
     }
 
     /**
-     * Get resumes
+     * Get filters
      *
      * @return \Doctrine\Common\Collections\Collection 
      */
-    public function getResumes()
+    public function getFilters()
     {
-        return $this->resumes;
+        return $this->filters;
     }
 
     /**
@@ -161,5 +166,28 @@ class User extends BaseUser
     public function getIsEmployer()
     {
         return $this->isEmployer;
+    }
+
+    /**
+     * Set resume
+     *
+     * @param \Acme\WorkBundle\Entity\Resume $resume
+     * @return User
+     */
+    public function setResume(\Acme\WorkBundle\Entity\Resume $resume = null)
+    {
+        $this->resume = $resume;
+    
+        return $this;
+    }
+
+    /**
+     * Get resume
+     *
+     * @return \Acme\WorkBundle\Entity\Resume 
+     */
+    public function getResume()
+    {
+        return $this->resume;
     }
 }

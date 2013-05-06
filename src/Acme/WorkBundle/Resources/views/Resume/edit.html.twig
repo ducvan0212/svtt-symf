@@ -1,6 +1,6 @@
 {% extends '::base.html.twig' %}
 
-{% block title %}Edit a filter{% endblock %}
+{% block title %}Edit your resume{% endblock %}
 
 {% block stylesheets %}
   {{ parent() }}
@@ -40,46 +40,81 @@
 {% endspaceless %}
 {% endblock %}
 
+{% block date_widget %}
+{% spaceless %}
+<div {{ block('widget_container_attributes') }}>
+  <input type="date" name="form[birthday]">
+</div>
+{% endspaceless %}
+{% endblock %}
+
 {% block body %}
-<h1>Edit a filter</h1>
+<h1>Edit your resume</h1>
 <form action="{{ path('work_updateResume', { 'id': resume.id }) }}" method="post" {{ form_enctype(form) }}>
 {{ form_errors(form) }}
 
 <div class="controls controls-row">
-  <div class="job-feature for-fit">
-    {{ form_label(form.location, 'Location', { 'label_attr': {'class': 'job-feature-label'} }) }}
+  <div class="job-feature span8">
+    {{ form_label(form.realName, 'Real Name', { 'label_attr': {'class': 'job-feature-label'} }) }}
     <div class="job-feature-detail">
-      {{ form_errors(form.location) }}
-      {{ form_widget(form.location) }}
+      {{ form_errors(form.realName) }}
+      {{ form_widget(form.realName) }}
+    </div>
+  </div>
+
+  <div class="job-feature for-fit date-feature">
+    {{ form_label(form.birthday, 'Birthday', { 'label_attr': {'class': 'job-feature-label'} }) }}
+    <div class="job-feature-detail">
+      {{ form_errors(form.birthday) }}
+      {{ form_widget(form.birthday) }}
     </div>
   </div>
 </div>
 
+
 <div class="job-feature">
-  <div class="job-feature-label">Job Description</div>
+  {{ form_label(form.contact, 'Contact (phone number, email, etc)', { 'label_attr': {'class': 'job-feature-label'} }) }}
   <div class="job-feature-detail">
-    {{ form_label(form.categories, 'Job Category', { 'label_attr': {'class': 'subfeature-label'} }) }}
-    {{ form_errors(form.categories) }}
-    {{ form_widget(form.categories) }}
-  </div>
-  <div class="job-feature-detail">
-    {{ form_label(form.jobPosition, 'Job Position', { 'label_attr': {'class': 'subfeature-label'} }) }}
-    {{ form_widget(form.jobPosition) }}
+    {{ form_errors(form.contact) }}
+    {{ form_widget(form.contact) }}
   </div>
 </div>
 
 <div class="job-feature">
-  <div class="job-feature-label">Job Benefit</div>
+  {{ form_label(form.graduatedPlace, 'Granduated Place', { 'label_attr': {'class': 'job-feature-label'} }) }}
   <div class="job-feature-detail">
-    {{ form_label(form.salary, 'Salary', { 'label_attr': {'class': 'subfeature-label'} }) }}
-    {{ form_widget(form.salary) }}
+    {{ form_errors(form.graduatedPlace) }}
+    {{ form_widget(form.graduatedPlace) }}
   </div>
 </div>
 
 <div class="job-feature">
-  <div class="job-feature-label">Job Requirement</div>
+  {{ form_label(form.falcuty, 'Faculty', { 'label_attr': {'class': 'job-feature-label'} }) }}
   <div class="job-feature-detail">
-    {{ form_label(form.languages, 'Prefered Languages', { 'label_attr': {'class': 'subfeature-label'} }) }}
+    {{ form_errors(form.falcuty) }}
+    {{ form_widget(form.falcuty) }}
+  </div>
+</div>
+
+<div class="job-feature">
+  {{ form_label(form.averageScore, 'Average Score', { 'label_attr': {'class': 'job-feature-label'} }) }}
+  <div class="job-feature-detail">
+    {{ form_errors(form.averageScore) }}
+    {{ form_widget(form.averageScore) }}
+  </div>
+</div>
+
+<div class="job-feature">
+  {{ form_label(form.aboutMe, 'About me', { 'label_attr': {'class': 'job-feature-label'} }) }}
+  <div class="job-feature-detail">
+    {{ form_errors(form.aboutMe) }}
+    {{ form_widget(form.aboutMe) }}
+  </div>
+</div>
+
+<div class="job-feature">
+  {{ form_label(form.languages, 'Languages', { 'label_attr': {'class': 'job-feature-label'} }) }}
+  <div class="job-feature-detail">
     {{ form_errors(form.languages) }}
     {{ form_widget(form.languages) }}
   </div>

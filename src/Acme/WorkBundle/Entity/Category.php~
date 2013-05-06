@@ -34,9 +34,9 @@ class Category
     private $jobs;
 
     /**
-    * @ORM\ManyToMany(targetEntity="Acme\WorkBundle\Entity\Resume", mappedBy="categories")
+    * @ORM\ManyToMany(targetEntity="Acme\WorkBundle\Entity\Filter", mappedBy="categories")
     **/
-    private $resumes;
+    private $filters;
 
     public function __construct() {
         $this->jobs = new \Doctrine\Common\Collections\ArrayCollection();
@@ -109,35 +109,35 @@ class Category
     }
 
     /**
-     * Add resumes
+     * Add filters
      *
-     * @param \Acme\WorkBundle\Entity\Resume $resumes
+     * @param \Acme\WorkBundle\Entity\Filter $filters
      * @return Category
      */
-    public function addResume(\Acme\WorkBundle\Entity\Resume $resumes)
+    public function addFilter(\Acme\WorkBundle\Entity\Filter $filters)
     {
-        $this->resumes[] = $resumes;
+        $this->filters[] = $filters;
     
         return $this;
     }
 
     /**
-     * Remove resumes
+     * Remove filters
      *
-     * @param \Acme\WorkBundle\Entity\Resume $resumes
+     * @param \Acme\WorkBundle\Entity\Filter $filters
      */
-    public function removeResume(\Acme\WorkBundle\Entity\Resume $resumes)
+    public function removeFilter(\Acme\WorkBundle\Entity\Filter $filters)
     {
-        $this->resumes->removeElement($resumes);
+        $this->filters->removeElement($filters);
     }
 
     /**
-     * Get resumes
+     * Get filters
      *
      * @return \Doctrine\Common\Collections\Collection 
      */
-    public function getResumes()
+    public function getFilters()
     {
-        return $this->resumes;
+        return $this->filters;
     }
 }

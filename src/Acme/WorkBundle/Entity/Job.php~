@@ -510,12 +510,12 @@ class Job
     }
 
     
-    public function estimator(\Acme\WorkBundle\Entity\Resume $resume) {
+    public function estimator(\Acme\WorkBundle\Entity\Filter $filter) {
         if ( $this->neededNumber - $this->recruitedNumber > 0 ) {
-            $eLanguage = $this->estimateLanguages($resume);
-            $eCategory = $this->estimateCategories($resume);
-            $eSalary = $this->estimateSalary($resume);
-            $eJobPosition = $this->estimateJobPosition($resume);
+            $eLanguage = $this->estimateLanguages($filter);
+            $eCategory = $this->estimateCategories($filter);
+            $eSalary = $this->estimateSalary($filter);
+            $eJobPosition = $this->estimateJobPosition($filter);
             $jobid = $this->getID();
             $e = $eLanguage + $eCategory + $eSalary + $eJobPosition;
             // print("job: $jobid | eLanguage: $eLanguage<br>");
@@ -529,10 +529,10 @@ class Job
     }
 
     // trong so 1->5. Cang to cang quan trong
-    public function estimateLanguages(\Acme\WorkBundle\Entity\Resume $resume) {
+    public function estimateLanguages(\Acme\WorkBundle\Entity\Filter $filter) {
         $counter = 0;
         $alpha = 2;
-        foreach ($resume->getLanguages() as $language) {
+        foreach ($filter->getLanguages() as $language) {
             if ($this->getLanguages()->contains($language)) {
                 $counter += $alpha;
             }
@@ -540,10 +540,10 @@ class Job
         return $counter;
     }
 
-    public function estimateCategories(\Acme\WorkBundle\Entity\Resume $resume) {
+    public function estimateCategories(\Acme\WorkBundle\Entity\Filter $filter) {
         $counter = 0;
         $alpha = 2;
-        foreach ($resume->getCategories() as $category) {
+        foreach ($filter->getCategories() as $category) {
             if ($this->getCategories()->contains($category)) {
                 $counter += $alpha;
             }
@@ -551,22 +551,45 @@ class Job
         return $counter;
     }
 
-    public function estimateSalary(\Acme\WorkBundle\Entity\Resume $resume) {
+    public function estimateSalary(\Acme\WorkBundle\Entity\Filter $filter) {
         $alpha = 5;
         $beta = 4;
-        if ($this->getSalary()->getId() == $resume->getSalary()->getId()) {
+        if ($this->getSalary()->getId() == $filter->getSalary()->getId()) {
             return $alpha;
-        } else if ($this->getSalary()->getId() - $resume->getSalary()->getId() == 1) {
+        } else if ($this->getSalary()->getId() - $filter->getSalary()->getId() == 1) {
             return $beta;
         }
         return 0;
     }
 
-    public function estimateJobPosition(\Acme\WorkBundle\Entity\Resume $resume) {
+    public function estimateJobPosition(\Acme\WorkBundle\Entity\Filter $filter) {
         $alpha = 5;
-        if ($this->getJobPosition()->getGroup() == $resume->getJobPosition()->getGroup()) {
+        if ($this->getJobPosition()->getGroup() == $filter->getJobPosition()->getGroup()) {
             return $alpha;
         }
         return 0;
+    }
+
+    /**
+     * Set expiredDate
+     *
+     * @param \DateTime $expiredDate
+     * @return Job
+     */
+    public function setExpiredDate($expiredDate)
+    {
+        $this->expiredDate = $expiredDate;
+    
+        return $this;
+    }
+
+    /**
+     * Get expiredDate
+     *
+     * @return \DateTime 
+     */
+    public function getExpiredDate()
+    {
+        return $this->expiredDate;
     }
 }

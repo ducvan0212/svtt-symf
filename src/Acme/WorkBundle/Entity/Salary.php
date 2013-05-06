@@ -34,9 +34,9 @@ class Salary
     private $job;
 
     /**
-     * @ORM\OneToMany(targetEntity="Resume", mappedBy="salary")
+     * @ORM\OneToMany(targetEntity="Filter", mappedBy="salary")
      */
-    private $resume;
+    private $filter;
 
     /**
      * Get id
@@ -112,35 +112,35 @@ class Salary
     }
 
     /**
-     * Add resume
+     * Add filter
      *
-     * @param \Acme\WorkBundle\Entity\Resume $resume
+     * @param \Acme\WorkBundle\Entity\Filter $filter
      * @return Salary
      */
-    public function addResume(\Acme\WorkBundle\Entity\Resume $resume)
+    public function addFilter(\Acme\WorkBundle\Entity\Filter $filter)
     {
-        $this->resume[] = $resume;
+        $this->filter[] = $filter;
     
         return $this;
     }
 
     /**
-     * Remove resume
+     * Remove filter
      *
-     * @param \Acme\WorkBundle\Entity\Resume $resume
+     * @param \Acme\WorkBundle\Entity\Filter $filter
      */
-    public function removeResume(\Acme\WorkBundle\Entity\Resume $resume)
+    public function removeFilter(\Acme\WorkBundle\Entity\Filter $filter)
     {
-        $this->resume->removeElement($resume);
+        $this->filter->removeElement($filter);
     }
 
     /**
-     * Get resume
+     * Get filter
      *
      * @return \Doctrine\Common\Collections\Collection 
      */
-    public function getResume()
+    public function getFilter()
     {
-        return $this->resume;
+        return $this->filter;
     }
 }

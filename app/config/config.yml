@@ -76,5 +76,5 @@ knp_paginator:
         sort_direction_name: direction # sort direction query parameter name
         distinct: true                 # ensure distinct results, useful when ORM queries are using GROUP BY statements
     template:
-        pagination: AcmeWorkBundle:Resume:sliding.html.twig     # sliding pagination controls template
+        pagination: AcmeWorkBundle:Filter:sliding.html.twig     # sliding pagination controls template
         sortable: KnpPaginatorBundle:Pagination:sortable_link.html.twig # sort link template    

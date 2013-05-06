@@ -5,6 +5,7 @@ namespace Acme\WorkBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Validator\Constraints\Count;
+use Symfony\Component\Validator\Constraints\Range;
 
 /**
  * Resume
@@ -24,16 +25,56 @@ class Resume
     private $id;
 
     /**
-    * @ORM\ManyToOne(targetEntity="Acme\UserBundle\Entity\User", inversedBy="resumes")
+    * @ORM\OneToOne(targetEntity="Acme\UserBundle\Entity\User", inversedBy="resume")
     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
     */
-    protected $user;
+    private $user;
 
     /**
-    * @ORM\ManyToOne(targetEntity="Location", inversedBy="resumes")
-    * @ORM\JoinColumn(name="location_id", referencedColumnName="id")
-    */
-    protected $location;
+     * @var string
+     *
+     * @ORM\Column(name="contact", type="text")
+     */
+    private $contact;
+
+    /**
+     * @ORM\Column(name="birthday", type="date")
+     */
+    private $birthday;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="realName", type="text")
+     */
+    private $realName;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="aboutMe", type="text")
+     */
+    private $aboutMe;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="graduatedPlace", type="text")
+     */
+    private $graduatedPlace;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="falcuty", type="text")
+     */
+    private $falcuty;
+
+    /**
+     * @ORM\Column(name="averageScore", type="decimal", scale=2))
+     * @Range(min = 0, max = 10, minMessage = "Minimum is 1", maxMessage = "Maximum is 10")
+     */
+    private $averageScore;    
 
     /**
     * @ORM\ManyToMany(targetEntity="Language", inversedBy="resumes")
@@ -41,25 +82,6 @@ class Resume
     * @Count(min = 1, minMessage = "At least one language must be selected")
     **/
     private $languages;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="Salary", inversedBy="resume")
-     * @ORM\JoinColumn(name="salary_id", referencedColumnName="id")
-     */
-    private $salary;
-
-    /**
-    * @ORM\ManyToMany(targetEntity="Category", inversedBy="resumes")
-    * @ORM\JoinTable(name="resumes_categories")
-    * @Count(min = 1, max = 4, minMessage = "At least one category must be selected", maxMessage = " |You cannot specify more than 5 categories")
-    **/
-    private $categories;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="JobPosition", inversedBy="resume")
-     * @ORM\JoinColumn(name="jobPosition_id", referencedColumnName="id")
-    */
-    private $jobPosition;
 
     /**
      * Get id
@@ -70,36 +92,175 @@ class Resume
     {
         return $this->id;
     }
+
     /**
      * Constructor
      */
     public function __construct()
     {
         $this->languages = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->categories = new \Doctrine\Common\Collections\ArrayCollection();
     }
-    
+
+
     /**
-     * Set location
+     * Set contact
      *
-     * @param \Acme\WorkBundle\Entity\Location $location
+     * @param string $contact
      * @return Resume
      */
-    public function setLocation(\Acme\WorkBundle\Entity\Location $location = null)
+    public function setContact($contact)
     {
-        $this->location = $location;
+        $this->contact = $contact;
     
         return $this;
     }
 
     /**
-     * Get location
+     * Get contact
      *
-     * @return \Acme\WorkBundle\Entity\Location 
+     * @return string 
      */
-    public function getLocation()
+    public function getContact()
     {
-        return $this->location;
+        return $this->contact;
+    }
+
+    /**
+     * Set birthday
+     *
+     * @param \DateTime $birthday
+     * @return Resume
+     */
+    public function setBirthday($birthday)
+    {
+        $this->birthday = $birthday;
+    
+        return $this;
+    }
+
+    /**
+     * Get birthday
+     *
+     * @return \DateTime 
+     */
+    public function getBirthday()
+    {
+        return $this->birthday;
+    }
+
+    /**
+     * Set aboutMe
+     *
+     * @param string $aboutMe
+     * @return Resume
+     */
+    public function setAboutMe($aboutMe)
+    {
+        $this->aboutMe = $aboutMe;
+    
+        return $this;
+    }
+
+    /**
+     * Get aboutMe
+     *
+     * @return string 
+     */
+    public function getAboutMe()
+    {
+        return $this->aboutMe;
+    }
+
+    /**
+     * Set graduatedPlace
+     *
+     * @param string $graduatedPlace
+     * @return Resume
+     */
+    public function setGraduatedPlace($graduatedPlace)
+    {
+        $this->graduatedPlace = $graduatedPlace;
+    
+        return $this;
+    }
+
+    /**
+     * Get graduatedPlace
+     *
+     * @return string 
+     */
+    public function getGraduatedPlace()
+    {
+        return $this->graduatedPlace;
+    }
+
+    /**
+     * Set falcuty
+     *
+     * @param string $falcuty
+     * @return Resume
+     */
+    public function setFalcuty($falcuty)
+    {
+        $this->falcuty = $falcuty;
+    
+        return $this;
+    }
+
+    /**
+     * Get falcuty
+     *
+     * @return string 
+     */
+    public function getFalcuty()
+    {
+        return $this->falcuty;
+    }
+
+    /**
+     * Set averageScore
+     *
+     * @param float $averageScore
+     * @return Resume
+     */
+    public function setAverageScore($averageScore)
+    {
+        $this->averageScore = $averageScore;
+    
+        return $this;
+    }
+
+    /**
+     * Get averageScore
+     *
+     * @return float 
+     */
+    public function getAverageScore()
+    {
+        return $this->averageScore;
+    }
+
+    /**
+     * Set user
+     *
+     * @param \Acme\UserBundle\Entity\User $user
+     * @return Resume
+     */
+    public function setUser(\Acme\UserBundle\Entity\User $user = null)
+    {
+        $this->user = $user;
+    
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return \Acme\UserBundle\Entity\User 
+     */
+    public function getUser()
+    {
+        return $this->user;
     }
 
     /**
@@ -136,104 +297,25 @@ class Resume
     }
 
     /**
-     * Set salary
+     * Set realName
      *
-     * @param \Acme\WorkBundle\Entity\Salary $salary
+     * @param string $realName
      * @return Resume
      */
-    public function setSalary(\Acme\WorkBundle\Entity\Salary $salary = null)
+    public function setRealName($realName)
     {
-        $this->salary = $salary;
+        $this->realName = $realName;
     
         return $this;
     }
 
     /**
-     * Get salary
+     * Get realName
      *
-     * @return \Acme\WorkBundle\Entity\Salary 
+     * @return string 
      */
-    public function getSalary()
+    public function getRealName()
     {
-        return $this->salary;
-    }
-
-    /**
-     * Add categories
-     *
-     * @param \Acme\WorkBundle\Entity\Category $categories
-     * @return Resume
-     */
-    public function addCategorie(\Acme\WorkBundle\Entity\Category $categories)
-    {
-        $this->categories[] = $categories;
-    
-        return $this;
-    }
-
-    /**
-     * Remove categories
-     *
-     * @param \Acme\WorkBundle\Entity\Category $categories
-     */
-    public function removeCategorie(\Acme\WorkBundle\Entity\Category $categories)
-    {
-        $this->categories->removeElement($categories);
-    }
-
-    /**
-     * Get categories
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getCategories()
-    {
-        return $this->categories;
-    }
-
-    /**
-     * Set jobPosition
-     *
-     * @param \Acme\WorkBundle\Entity\JobPosition $jobPosition
-     * @return Resume
-     */
-    public function setJobPosition(\Acme\WorkBundle\Entity\JobPosition $jobPosition = null)
-    {
-        $this->jobPosition = $jobPosition;
-    
-        return $this;
-    }
-
-    /**
-     * Get jobPosition
-     *
-     * @return \Acme\WorkBundle\Entity\JobPosition 
-     */
-    public function getJobPosition()
-    {
-        return $this->jobPosition;
-    }
-
-    /**
-     * Set user
-     *
-     * @param \Acme\UserBundle\Entity\User $user
-     * @return Resume
-     */
-    public function setUser(\Acme\UserBundle\Entity\User $user = null)
-    {
-        $this->user = $user;
-    
-        return $this;
-    }
-
-    /**
-     * Get user
-     *
-     * @return \Acme\UserBundle\Entity\User 
-     */
-    public function getUser()
-    {
-        return $this->user;
+        return $this->realName;
     }
 }

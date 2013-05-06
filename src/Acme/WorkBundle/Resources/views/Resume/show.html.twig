@@ -1,6 +1,6 @@
 {% extends '::base.html.twig' %}
 
-{% block title %}Your filter{% endblock %}
+{% block title %}{{ 'Your resume' }}{% endblock %}
 
 {% block stylesheets %}
   {{ parent() }}
@@ -10,86 +10,86 @@
 {% endblock %}
 
 {% block body %}
-    <div>
-      <a href="{{ path('work_indexResume') }}" class="btn btn-primary">{{ 'Back' }}</a>
-      <a href="{{ path('work_updateResume', { 'id': resume.id }) }}" class="btn btn-primary">Update</a>
-      <h1>Your filter</h1>
+  {% if app.user.id == resume.user.id %}
+    <a href="{{ path('work_updateResume', { 'id': resume.id }) }}" class="btn btn-primary">Update this resume</a>
+  {% endif %}
+  <h1>Your resume</h1>
 
-      <table class="table">
-        <thead>
-          <tr>
-            <th>Location</th>
-            <th>Salary</th>
-            <th>Job position</th>
-            <th>Job Categories</th>
-            <th>Prefered Language</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>{{ resume.location.name }}</td>
-            <td>{{ resume.salary.level }}</td>
-            <td>{{ resume.jobPosition.name }}</td>
-            <td>
-              <ul>
-                {% for ca in resume.categories %}
-                  <li>{{ ca.name }}</li>
-                {% endfor %}
-              </ul>
-            </td>
-            <td>
-              <ul>
-                {% for la in resume.languages %}
-                  <li>{{ la.name }}</li>
-                {% endfor %}
-              </ul>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+<div class="controls controls-row">
+  <div class="job-feature span8">
+    <div class="job-feature-label">
+      Real Name
     </div>
-
-    <div>
-      <h1>Recommended jobs</h1>
-      <table class="table table-hover">
-        <thead>
-          <tr>
-            <th>Job Title</th>
-            <th>Job Salary</th>
-            <th>Job Position</th>
-            <th>Job Categories</th>
-            <th>Prefered Language</th>
-            <th>Company Address</th>
-          </tr>
-        </thead>
-        <tbody>
-          {% for job in pagination %}
-            <tr>
-              <td>
-                <a href="{{ path('work_showJob', { 'id': job.id }) }}">{{ job.title }}</a>
-              </td>
-              <td>{{ job.salary.level }}</td>
-              <td>{{ job.jobPosition.name }}</td>
-              <td>
-                <ul style="margin-left: 0px;">
-                  {% for ca in job.categories %}
-                    <li>{{ ca.name }}</li>
-                  {% endfor %}
-                </ul>
-              </td>
-              <td>
-                <ul style="margin-left: 0px;">
-                  {% for la in job.languages %}
-                    <li>{{ la.name }}</li>
-                  {% endfor %}
-                </ul>
-              </td>
-              <td>{{ job.address }}</td>
-            </tr>
-          {% endfor %}
-        </tbody>
-      </table>
-
-      {{ knp_pagination_render(pagination) }}
+    <div class="job-feature-detail">
+      {{ resume.realName }}
     </div>
+  </div>
+
+  <div class="job-feature for-fit date-feature">
+    <div class="job-feature-label">
+      Birthday
+    </div>
+    <div class="job-feature-detail">
+      {{ resume.birthday|date('d-m-Y') }}
+    </div>
+  </div>
+</div>
+
+<div class="job-feature">
+  <div class="job-feature-label">
+    Contact
+  </div>
+  <div class="job-feature-detail">
+    {{ resume.contact }}
+  </div>
+</div>
+
+<div class="job-feature">
+  <div class="job-feature-label">
+    Graduated Place
+  </div>
+  <div class="job-feature-detail">
+    {{ resume.graduatedPlace }}
+  </div>
+</div>
+
+<div class="job-feature">
+  <div class="job-feature-label">
+    Faculty
+  </div>
+  <div class="job-feature-detail">
+    {{ resume.falcuty }}
+  </div>
+</div>
+
+<div class="job-feature">
+  <div class="job-feature-label">
+    Average score
+  </div>
+  <div class="job-feature-detail">
+    {{ resume.averageScore }}
+  </div>
+</div>
+
+<div class="job-feature">
+  <div class="job-feature-label">
+    About me
+  </div>
+  <div class="job-feature-detail">
+    {{ resume.aboutMe }}
+  </div>
+</div>
+
+<div class="job-feature">
+  <div class="job-feature-label">
+    Language
+  </div>
+  <div class="job-feature-detail">
+    <ul> 
+      {% for la in resume.languages %}
+        <li>{{ la.name }}</li>
+      {% endfor %}
+    </ul>
+  </div>
+</div>
 {% endblock %}

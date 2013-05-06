@@ -10,7 +10,9 @@
 {% endblock %}
 
 {% block body %}
-  <a href="{{ path('work_updateJob', { 'id': job.id }) }}" class="btn btn-primary">Update this job</a>
+  {% if app.user.id == job.user.id %}
+    <a href="{{ path('work_updateJob', { 'id': job.id }) }}" class="btn btn-primary">Update this job</a>
+  {% endif %}
   <h1>{{ job.title }}</h1>
 
   <div class="job-feature">
@@ -61,7 +63,7 @@
       <div class="subfeature-label">
         Other Job Description
       </div>
-      {{ job.otherDescription }}
+      {{ job.otherDescription|nl2br }}
     </div>
   </div>
 
@@ -77,7 +79,7 @@
       <div class="subfeature-label">
         Other Benefit
       </div>
-      {{ job.otherBenefit }}
+      {{ job.otherBenefit|nl2br }}
     </div>
   </div>
       
@@ -97,7 +99,7 @@
       <div class="subfeature-label">
         Other Requirement
       </div>
-      {{ job.jobRequirement }}
+      {{ job.jobRequirement|nl2br }}
     </div>
   </div>
 
@@ -106,7 +108,7 @@
       Required Application
     </div>
     <div class="job-feature-detail">
-      {{ job.requiredApplication }}
+      {{ job.requiredApplication|nl2br }}
     </div>
   </div>
 

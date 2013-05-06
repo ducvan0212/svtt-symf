@@ -15,15 +15,25 @@ work_updateJob:
   path: /job/update/{id}
   defaults: { _controller: AcmeWorkBundle:Job:update }
 
-work_createResume:
+work_createFilter:
   path: /filter/create
-  defaults: { _controller: AcmeWorkBundle:Resume:create }
-work_indexResume:
+  defaults: { _controller: AcmeWorkBundle:Filter:create }
+work_indexFilter:
   path: /filter/index
-  defaults: { _controller: AcmeWorkBundle:Resume:index }
-work_showResume:
+  defaults: { _controller: AcmeWorkBundle:Filter:index }
+work_showFilter:
   path: /filter/show/{id}
+  defaults: { _controller: AcmeWorkBundle:Filter:show }
+work_updateFilter:
+  path: /filter/update/{id}
+  defaults: { _controller: AcmeWorkBundle:Filter:update }
+
+work_createResume:
+  path: /resume/create
+  defaults: { _controller: AcmeWorkBundle:Resume:create }
+work_showResume:
+  path: /resume/show/{id}
   defaults: { _controller: AcmeWorkBundle:Resume:show }
 work_updateResume:
-  path: /filter/update/{id}
+  path: /resume/update/{id}
   defaults: { _controller: AcmeWorkBundle:Resume:update }

@@ -25,9 +25,15 @@
                             {% if app.user.isEmployer %}
                                 <li><a href="{{ path('work_indexJob') }}">{{ 'Your jobs' }}</a></li>
                                 <li><a href="{{ path('work_createJob') }}">{{ 'Publish a job' }}</a></li>
+                            {% else %}
+                                {% if app.user.resume %}
+                                    <li><a href="{{ path('work_showResume', { 'id': app.user.resume.id }) }}">{{ 'Your resume' }}</a></li>
+                                {% else %}
+                                    <li><a href="{{ path('work_createResume') }}">{{ 'Create your resume' }}</a></li>
+                                {% endif%}
                             {% endif %}
-                            <li><a href="{{ path('work_indexResume') }}">{{ 'Your filters' }}</a></li>
-                            <li><a href="{{ path('work_createResume') }}">{{ 'New filter' }}</a></li>
+                            <li><a href="{{ path('work_indexFilter') }}">{{ 'Your filters' }}</a></li>
+                            <li><a href="{{ path('work_createFilter') }}">{{ 'New filter' }}</a></li>
                             
                             <li><a href="{{ path('fos_user_profile_show') }}">{{ 'Profile' }}</a></li>
                             <li><a href="{{ path('fos_user_security_logout') }}">{{ 'layout.logout'|trans({}, 'FOSUserBundle') }}</a></li>
@@ -60,7 +66,7 @@
     	 -->
         </div>
         <footer class="footer">
-            Powered by Nguyen Duc Van, 2013            
+            Copyright ICT54-2, group 5, 2013            
         </footer>
     </body>
 </html>
