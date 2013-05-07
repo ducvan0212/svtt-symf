@@ -136,14 +136,15 @@
   </div>
 
     
-  {% if (app.user.isEmployer != true) %}
-    {% if job in app.user.resume.jobs %}
+  {% if (app.user.isEmployer == false) %}
+    {% if existedApplicant %}
       <div class="text-center" style="margin-top: 20px;">
         {{ 'You applied your resume to this job' }}
       </div>
     {% else %}
-      <form action="{{ path('work_applyResume', { 'id': job.id }) }}" method="post" {{ form_enctype(form) }}>
-        {{ form_widget(form.jobs) }}
+      <form action="{{ path('work_createApplicant') }}" method="post" {{ form_enctype(form) }}>
+        {{ form_widget(form.job) }}
+        {{ form_widget(form.resume) }}
         {{ form_rest(form) }}
       <input type="submit" class="btn btn-primary btn-large offset5" style="margin-top: 20px;" value="Apply" />
       </form>
@@ -157,15 +158,22 @@
           <th>Graduated Place</th>
           <th>Faculty</th>
           <th>Avarage Score</th>
+          <th>Make it</th>
         </tr>
       </thead>
       <tbody>
-        {% for resume in job.resumes %}
+        {% for applicant in job.applicants %}
           <tr>
-            <td><a href="{{ path('work_showResume', { 'id': resume.id }) }}">{{ resume.id }}</a></td>
-            <td>{{ resume.graduatedPlace }}</td>
-            <td>{{ resume.falcuty }}</td>
-            <td>{{ resume.averageScore }}
+            <td><a href="{{ path('work_showResume', { 'id': applicant.resume.id }) }}">{{ applicant.resume.id }}</a></td>
+            <td>{{ applicant.resume.graduatedPlace }}</td>
+            <td>{{ applicant.resume.falcuty }}</td>
+            <td>{{ applicant.resume.averageScore }}</td>
+            <td>
+              {% if applicant.consideration %}
+                <a href="{{ path('work_updateApplicant', { 'id': applicant.id }) }}">{{ 'available' }}</a>
+              {% else %}
+                <a href="{{ path('work_updateApplicant', { 'id': applicant.id }) }}">{{ 'unavailable' }}</a>
+              {% endif %}
             </td>
           </tr>
         {% endfor %}

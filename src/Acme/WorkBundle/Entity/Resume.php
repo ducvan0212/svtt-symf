@@ -84,11 +84,10 @@ class Resume
     private $languages;
 
     /**
-    * @ORM\ManyToMany(targetEntity="Job", inversedBy="resumes")
-    * @ORM\JoinTable(name="resumes_jobs")
-    **/
-    private $jobs;
-
+     * @ORM\OneToMany(targetEntity="Applicant", mappedBy="resume")
+     */
+    private $applicants;
+    
     /**
      * Get id
      *
@@ -357,5 +356,38 @@ class Resume
     public function getJobs()
     {
         return $this->jobs;
+    }
+
+    /**
+     * Add applicants
+     *
+     * @param \Acme\WorkBundle\Entity\Applicant $applicants
+     * @return Resume
+     */
+    public function addApplicant(\Acme\WorkBundle\Entity\Applicant $applicants)
+    {
+        $this->applicants[] = $applicants;
+    
+        return $this;
+    }
+
+    /**
+     * Remove applicants
+     *
+     * @param \Acme\WorkBundle\Entity\Applicant $applicants
+     */
+    public function removeApplicant(\Acme\WorkBundle\Entity\Applicant $applicants)
+    {
+        $this->applicants->removeElement($applicants);
+    }
+
+    /**
+     * Get applicants
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getApplicants()
+    {
+        return $this->applicants;
     }
 }

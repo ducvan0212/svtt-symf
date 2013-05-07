@@ -10,6 +10,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 use Acme\WorkBundle\Entity\Job;
+use Acme\WorkBundle\Entity\Applicant;
 
 class JobController extends Controller
 {
@@ -136,15 +137,30 @@ class JobController extends Controller
           'No job found'
         );
       }
-      $form = $this->createFormBuilder($resume)
-        ->add('jobs', 'hidden', array(
-            'data' => $job->getId()
-      ))->getForm()->createView();
+      $applicant = new Applicant();
+      $existedApplicant = false;
+      $form = NULL;
+      if ($user->getIsEmployer() === false) {
+        $form = $this->createFormBuilder($applicant)
+          ->add('job', 'hidden', array(
+              'data' => $job->getId()
+          ))
+          ->add('resume', 'hidden', array(
+              'data' => $resume->getId()
+          ))
+        ->getForm()->createView();
+        
+        foreach ($resume->getApplicants() as $key => $value) {
+          if ($value->getJob() == $job)
+            $existedApplicant = true;
+        }
+      } 
       
       return $this->render('AcmeWorkBundle:Job:show.html.twig', array(
             'job' => $job,
             'resume' => $resume,
             'form' => $form,
+            'existedApplicant' => $existedApplicant,
             ));
     }
 

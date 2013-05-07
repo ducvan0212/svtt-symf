@@ -130,9 +130,9 @@ class Job
     private $expiredDate;
 
     /**
-    * @ORM\ManyToMany(targetEntity="Acme\WorkBundle\Entity\Resume", mappedBy="jobs")
-    **/
-    private $resumes;
+     * @ORM\OneToMany(targetEntity="Applicant", mappedBy="job")
+     */
+    private $applicants;
 
     public function __construct() {
         $this->languages = new \Doctrine\Common\Collections\ArrayCollection();
@@ -630,5 +630,38 @@ class Job
     public function getResumes()
     {
         return $this->resumes;
+    }
+
+    /**
+     * Add applicants
+     *
+     * @param \Acme\WorkBundle\Entity\Applicant $applicants
+     * @return Job
+     */
+    public function addApplicant(\Acme\WorkBundle\Entity\Applicant $applicants)
+    {
+        $this->applicants[] = $applicants;
+    
+        return $this;
+    }
+
+    /**
+     * Remove applicants
+     *
+     * @param \Acme\WorkBundle\Entity\Applicant $applicants
+     */
+    public function removeApplicant(\Acme\WorkBundle\Entity\Applicant $applicants)
+    {
+        $this->applicants->removeElement($applicants);
+    }
+
+    /**
+     * Get applicants
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getApplicants()
+    {
+        return $this->applicants;
     }
 }
