@@ -129,6 +129,9 @@ class JobController extends Controller
 
       $user = $this->getUser();
       $resume = $user->getResume();
+      if ( is_null($resume) && $user->getIsEmployer() === false) {
+        return $this->redirect($this->generateUrl('work_createResume'));
+      }
       $job = $this->getDoctrine()
             ->getRepository('AcmeWorkBundle:Job')
             ->find($id);
