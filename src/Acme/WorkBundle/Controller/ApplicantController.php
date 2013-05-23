@@ -75,10 +75,14 @@ class ApplicantController extends Controller
             ->getRepository('AcmeWorkBundle:Applicant')
             ->find($id);
 
+        $job = $applicant->getJob();
+
         if ($applicant->getConsideration()) {
             $applicant->setConsideration(false);
+            $job->setRecruitedNumber($job->getRecruitedNumber() - 1);
         } else {
             $applicant->setConsideration(true);
+            $job->setRecruitedNumber($job->getRecruitedNumber() + 1);
         }
         $em = $this->getDoctrine()->getManager();
         $em->persist($applicant);

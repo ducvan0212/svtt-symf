@@ -157,8 +157,8 @@
           <th>Resume id</th>
           <th>Graduated Place</th>
           <th>Faculty</th>
-          <th>Avarage Score</th>
-          <th>Make it</th>
+          <th>University Avarage Score</th>
+          <th>Hide</th>
         </tr>
       </thead>
       <tbody>
@@ -170,9 +170,9 @@
             <td>{{ applicant.resume.averageScore }}</td>
             <td>
               {% if applicant.consideration %}
-                <a href="{{ path('work_updateApplicant', { 'id': applicant.id }) }}">{{ 'available' }}</a>
+                <a href="{{ path('work_updateApplicant', { 'id': applicant.id }) }}">{{ 'yes' }}</a>
               {% else %}
-                <a href="{{ path('work_updateApplicant', { 'id': applicant.id }) }}">{{ 'unavailable' }}</a>
+                <a href="{{ path('work_updateApplicant', { 'id': applicant.id }) }}">{{ 'no' }}</a>
               {% endif %}
             </td>
           </tr>
