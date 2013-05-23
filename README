@@ -1,11 +1,18 @@
+HUONG DAN CAI DAT
 
 1) COPY va doi file app/config/parameter.yml.dist thanh parameter.yml
-2) git ignore
+2) sua cac parameter nhu tutorial trong README.md
+3) de push code len git, thong nhat tao file git ignore
   /web/bundles/
   /app/bootstrap*
   /app/cache/*
   /app/logs/*
   /vendor/
   /app/config/parameters.yml
-3) ./composer install
-4) sau khi commit thi push len branch cua minh, sau do pull request
+4) ./composer install
+5) tao cac bang trong database 
+  php app/console doctrine:schema:update --force
+6) them du lieu bang tay vao cac bang Category, JobPosition, Language, Location, Salary
+7) chay server trong svtt-sym/web
+  cd path/to/svtt-sym/web
+  php -S 0.0.0.0:8080
